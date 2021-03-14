@@ -36,7 +36,7 @@ const LoginPage: React.FC = () => {
   return (
     <div className="login-page">
       <div className="login-form-container">
-        <h1>Every Spending Counts. Keep track of it.</h1>
+        <h1>The King.</h1>
         <h3>Log In</h3>
         <p>Enter your credentials to proceed</p>
         <form onSubmit={handleSubmit}>
