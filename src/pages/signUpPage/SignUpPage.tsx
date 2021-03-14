@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import building from "../../images/building.jpg";
 import { signUpUser } from "../../redux/actions/authAction";
-import { RootStateType } from "../../redux/reducers";
+import { RootStateType } from "../../redux/reducers/reducers";
 
 const SignUpPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -42,7 +42,7 @@ const SignUpPage: React.FC = () => {
         <img src={building} alt="black and white bilging" />
       </div>
       <div className="signup-page-form-container">
-        <h1>Every Spending Counts. Keep track of it.</h1>
+        <h1>The King.</h1>
         <h3>Sign Up</h3>
         <p>Enter your credentials to proceed</p>
         <form onSubmit={handleSubmit}>
