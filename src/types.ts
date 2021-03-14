@@ -30,3 +30,19 @@ export type IUserLogIn = {
   email: string;
   password: string;
 };
+
+export type IGame = {
+  game_created_on: string;
+  game_creator_id: number;
+  game_ended_on: null | string;
+  game_id: number;
+  player_array: IGamePlayer[];
+};
+
+export type IGamePlayer = {
+  id: string;
+  score: string;
+  winner: boolean;
+  playerName: string;
+  gameCreator: boolean;
+};
