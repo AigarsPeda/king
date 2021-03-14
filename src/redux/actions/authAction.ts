@@ -4,16 +4,8 @@ import { isToken } from "../../helpers/isToken";
 import { callAPI } from "../../services/callAPI";
 import { IDecoder, IUserAuth, IUserLogIn, IUserSignUp } from "../../types";
 import { RootStateType } from "../reducers/reducers";
-import {
-  AuthenticateActionTypes,
-  AUTHENTICATE_USER,
-  UNAUTHENTICATED_USER
-} from "../types/authTypes";
-import {
-  CLEAR_USER_DATA,
-  SET_USER_DATA,
-  UserActionTypes
-} from "../types/userTypes";
+import { AuthenticateActionTypes, AUTHENTICATE_USER } from "../types/authTypes";
+import { SET_USER_DATA, UserActionTypes } from "../types/userTypes";
 
 type AppThunk<ReturnType = void> = ThunkAction<
   ReturnType,
