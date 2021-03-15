@@ -14,6 +14,8 @@ type AppThunk<ReturnType = void> = ThunkAction<
   AuthenticateActionTypes | UserActionTypes
 >;
 
+const isTokenExpired = (exp: number) => Date.now() >= exp * 1000;
+
 // create new user
 export const signUpUser = (signUpData: IUserSignUp): AppThunk => async (
   dispatch
@@ -24,6 +26,7 @@ export const signUpUser = (signUpData: IUserSignUp): AppThunk => async (
       method: "POST",
       data: signUpData
     });
+
     const { token }: { token: string } = response;
     const decoded = jwt_decode(token) as IDecoder;
 
