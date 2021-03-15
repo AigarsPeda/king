@@ -6,7 +6,7 @@ export type IUserAuth = {
 
 export type IDecoder = {
   iat: number;
-  exp: number;
+  // exp: number;
   user: IUser;
 };
 
