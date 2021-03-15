@@ -10,6 +10,7 @@ const DashboardPage: React.FC = () => {
   }, [dispatch]);
   return (
     <div>
+      {console.log(Date.now().valueOf() / 1000)}
       <h1>Stats And Game Data</h1>
     </div>
   );
