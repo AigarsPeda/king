@@ -10,7 +10,7 @@ const DashboardPage: React.FC = () => {
   }, [dispatch]);
   return (
     <div>
-      <h1>Stats And Game Data</h1>
+      <h1>Stats And Game Data!</h1>
     </div>
   );
 };
