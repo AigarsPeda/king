@@ -36,29 +36,39 @@ const LoginPage: React.FC = () => {
   return (
     <div className="login-page">
       <div className="login-form-container">
-        <h1>The King.</h1>
-        <h3>Log In</h3>
-        <p>Enter your credentials to proceed</p>
+        <h1>
+          Hey, <br /> Login Now.
+        </h1>
+        <div className="login-options">
+          <p>If you are new /</p> <Link to="/signup">Create Account</Link>
+        </div>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="email">Email Address</label>
           <input
+            placeholder="Your email"
             type="email"
             value={user.email}
             onChange={handleChange}
             name="email"
             autoComplete="on"
           />
-          <label htmlFor="password">Password</label>
           <input
+            placeholder="Your password"
             type="password"
             value={user.password}
             onChange={handleChange}
             name="password"
             autoComplete="off"
           />
+          <div className="terms">
+            <input type="checkbox" name="terms" value="true" />
+            <label htmlFor="terms">I’m okay with Terms of Service</label>
+          </div>
+
           <button type="submit">Login</button>
-          <Link to="/signup">Don&apos;t have a account?</Link>
         </form>
+        <div className="login-options">
+          <p>Forgot Password /</p> <Link to="/reset">Reset</Link>
+        </div>
       </div>
 
       <div className="login-image-container">
