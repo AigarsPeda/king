@@ -7,15 +7,20 @@
 .login-page {
   display: flex;
   width: 100%;
-  // margin: 0 auto;
-
-
+  margin: auto 0;
 
   .login-form-container {
     width: 100%;
-    padding: 4.5rem 3rem 0 3rem;
-    // margin: auto;
-    // margin: 0 auto;
+    padding: 75px 50px;
+    margin: auto;
+
+
+    svg {
+      width: 50px;
+      height: 50px;
+      fill: $main-text-color;
+      margin-bottom: 1.5rem;
+    }
 
 
     h1 {
@@ -59,7 +64,7 @@
         padding: 15px 10px;
         font-weight: 500;
         line-height: 1.5;
-        font-size: 14px;
+        font-size: 0.875rem; // 14px
         color: $main-text-color;
       }
 
@@ -79,7 +84,17 @@
         }
 
         label {
-          @include p-secondary-semi-bold-mobile;
+
+          a {
+            @include a-secondary-semi-bold-mobile;
+            text-decoration: none;
+            color: $main-text-color;
+
+            &:visited {
+              color: $main-text-color;
+            }
+          }
+
         }
       }
 
