@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
+import IconCrown from "../../icons/IconCrown";
 // image
-import sightWheel from "../../images/sight-wheel.jpg";
+import sportNumbers from "../../images/sport-numbers.webp";
 import { logInUser } from "../../redux/actions/authAction";
 import { RootStateType } from "../../redux/reducers/reducers";
 
@@ -36,6 +37,7 @@ const LoginPage: React.FC = () => {
   return (
     <div className="login-page">
       <div className="login-form-container">
+        <IconCrown />
         <h1>
           Hey, <br /> Login Now.
         </h1>
@@ -61,7 +63,9 @@ const LoginPage: React.FC = () => {
           />
           <div className="terms">
             <input type="checkbox" name="terms" value="true" />
-            <label htmlFor="terms">I’m okay with Terms of Service</label>
+            <label htmlFor="terms">
+              <Link to="/terms">I’m okay with Terms of Service</Link>
+            </label>
           </div>
 
           <button type="submit">Login</button>
@@ -72,7 +76,7 @@ const LoginPage: React.FC = () => {
       </div>
 
       <div className="login-image-container">
-        <img src={sightWheel} alt="black and white house" />
+        <img src={sportNumbers} alt="black and white house" />
       </div>
     </div>
   );
