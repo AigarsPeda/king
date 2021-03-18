@@ -1,5 +1,7 @@
-// @use '../../scss/mixins' as *;
-// @use '../../scss/variables' as *;
+@use '../../scss/query' as *;
+@use '../../scss/mixins' as *;
+@use '../../scss/variables' as *;
+@use '../../scss/typography.mixins.scss' as *;
 
 // .signup-page {
 //   display: flex;
