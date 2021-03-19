@@ -3,67 +3,123 @@
 @use '../../scss/variables' as *;
 @use '../../scss/typography.mixins.scss' as *;
 
-// .signup-page {
-//   display: flex;
-//   width: 100%;
+.signup-page {
+  display: flex;
+  width: 100%;
 
-//   .signup-page-image-container {
-//     width: 65%;
+  svg {
+    width: 50px;
+    height: 50px;
+    fill: $main-text-color;
+    margin-bottom: 1.5rem;
+  }
 
-//     img {
-//       width: 100%;
-//       height: 100vh;
-//       object-fit: cover;
-//       display: block;
-//     }
-//   }
+  h1 {
+    @include h1-bold-mobile;
+    margin-bottom: 25px;
+  }
 
-//   .signup-page-form-container {
-//     width: 35%;
-//     padding: 1.5rem 3rem 0 3rem;
+  .signup-page-image-container {
+    display: none;
 
-//     h1 {
-//       font-size: 3.25rem;
-//       font-weight: bold;
-//     }
+    @include respond-above(md) {
+      width: 65%;
+      display: block;
 
-//     h3 {
-//       font-size: 2rem;
-//       margin-top: 3rem;
-//     }
+      img {
+        width: 100%;
+        height: 100vh;
+        object-fit: cover;
+        display: block;
+      }
+    }
+  }
 
-//     p {
-//       opacity: 0.7;
-//       margin-bottom: 1rem;
-//     }
+  .signup-page-form-container {
+    width: 100%;
+    padding: 75px 50px;
 
-//     form {
-//       label {
-//         display: block;
-//         margin: 0 auto;
-//         margin-top: 1rem;
-//       }
+    @include respond-above(md) {
+      width: 35%;
+      margin: auto 0;
+    }
 
-//       input {
-//         // btn-styles are in styles.scss
-//         @include input-styles;
-//       }
+    .signup-options {
+      display: flex;
+      margin-bottom: 15px;
 
-//       button {
-//         // btn-styles are in styles.scss
-//         @include btn-styles;
-//       }
+      p {
+        @include p-secondary-semi-bold-mobile;
+        color: $secondary-text-color;
+        margin-right: 10px;
+      }
 
-//       a {
-//         opacity: 0.7;
-//         font-size: $small-text-size;
+      a {
+        @include a-secondary-semi-bold-mobile;
+        text-decoration: none;
+        color: $main-text-color;
 
-//         text-decoration: none;
-//       }
-//     }
-//   }
+        &:visited {
+          color: $main-text-color;
+        }
+      }
+    }
 
-//   .signup-page-error {
-//     color: $danger-color;
-//   }
-// }
+    form {
+      input {
+        display: block;
+        width: 100%;
+        height: 40px;
+        border: 2px solid $border-color;
+        border-radius: 6px;
+        margin-bottom: 12px;
+        padding: 15px 10px;
+        font-weight: 500;
+        line-height: 1.5;
+        font-size: 0.875rem; // 14px
+        color: $main-text-color;
+      }
+
+      .terms {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-bottom: 30px;
+
+        input {
+          width: 14px;
+          height: 14px;
+          margin: 0 10px 0 0;
+          border: 2px solid $border-color;
+          transform: scale(1.2);
+        }
+
+        label {
+          a {
+            @include a-secondary-semi-bold-mobile;
+            text-decoration: none;
+            color: $main-text-color;
+
+            &:visited {
+              color: $main-text-color;
+            }
+          }
+        }
+      }
+
+      button {
+        width: 100%;
+        border: none;
+        border-radius: 6px;
+        background-color: $primary-accent-color;
+        color: $light-text-color;
+        height: 40px;
+        margin-bottom: 15px;
+      }
+    }
+  }
+
+  .signup-page-error {
+    // color: $danger-color;
+  }
+}
