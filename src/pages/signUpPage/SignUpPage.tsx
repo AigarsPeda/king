@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
-import building from "../../images/building.jpg";
+import IconCrown from "../../icons/IconCrown";
+import volley from "../../images/volley.webp";
 import { signUpUser } from "../../redux/actions/authAction";
 import { RootStateType } from "../../redux/reducers/reducers";
 
@@ -39,47 +40,56 @@ const SignUpPage: React.FC = () => {
   return (
     <div className="signup-page">
       <div className="signup-page-image-container">
-        <img src={building} alt="black and white bilging" />
+        <img src={volley} alt="black and white bilging" />
       </div>
       <div className="signup-page-form-container">
-        <h1>The King.</h1>
-        <h3>Sign Up</h3>
-        <p>Enter your credentials to proceed</p>
+        <IconCrown />
+        <h1>
+          Hey, <br /> Create Account Now.
+        </h1>
+        <div className="signup-options">
+          <p>Already have an account /</p> <Link to="/login">Log In Now</Link>
+        </div>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="name">Name</label>
           <input
+            placeholder="Your name"
             type="text"
             value={user.name}
             onChange={handleChange}
             name="name"
             autoComplete="on"
           />
-          <label htmlFor="surname">Surname</label>
           <input
+            placeholder="Your surname"
             type="text"
             value={user.surname}
             onChange={handleChange}
             name="surname"
             autoComplete="on"
           />
-          <label htmlFor="email">Email Address</label>
           <input
+            placeholder="Your email"
             type="email"
             value={user.email}
             onChange={handleChange}
             name="email"
             autoComplete="on"
           />
-          <label htmlFor="password">Password</label>
           <input
+            placeholder="Your password"
             type="password"
             value={user.password}
             onChange={handleChange}
             name="password"
             autoComplete="off"
           />
+          <div className="terms">
+            <input type="checkbox" name="terms" value="true" />
+            <label htmlFor="terms">
+              <Link to="/terms">I’m okay with Terms of Service</Link>
+            </label>
+          </div>
           <button type="submit">Sign Up</button>
-          <Link to="/login">Already have an account?</Link>
         </form>
       </div>
     </div>
