@@ -61,13 +61,6 @@ const LoginPage: React.FC = () => {
             name="password"
             autoComplete="off"
           />
-          <div className="terms">
-            <input type="checkbox" name="terms" value="true" />
-            <label htmlFor="terms">
-              <Link to="/terms">I’m okay with Terms of Service</Link>
-            </label>
-          </div>
-
           <button type="submit">Login</button>
         </form>
         <div className="login-options">
