@@ -1,0 +1,29 @@
+@use '../../scss/query' as *;
+@use '../../scss/mixins' as *;
+@use '../../scss/variables' as *;
+@use '../../scss/typography.mixins' as *;
+
+.profile {
+  .profile-header {
+    display: flex;
+    justify-content: space-between;
+
+    .profile-menu-icon {
+      width: 25px;
+      height: 25px;
+      fill: $secondary-text-color;
+    }
+
+    .profile-crown-icon {
+      width: 50px;
+      height: 50px;
+      fill: $main-text-color;
+    }
+
+    .profile-gear-icon {
+      width: 25px;
+      height: 25px;
+      fill: $secondary-text-color;
+    }
+  }
+}
