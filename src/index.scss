@@ -5,6 +5,9 @@
 @use "./scss/query";
 @use "./scss/typography";
 
+// components
+@use "./components/Profile/profile";
+
 // pages
 @use "./pages/noMatch/noMatchPage";
 @use "./pages/loginPage/loginPage";
