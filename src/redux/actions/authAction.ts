@@ -32,18 +32,20 @@ export const signUpUser = (signUpData: IUserSignUp): AppThunk => async (
 
     console.log("decoded: ", decoded);
 
-    dispatch({
-      type: AUTHENTICATE_USER,
-      payload: true
-    });
+    if (token) {
+      dispatch({
+        type: AUTHENTICATE_USER,
+        payload: true
+      });
 
-    dispatch({
-      type: SET_USER_DATA,
-      payload: decoded.user
-    });
+      dispatch({
+        type: SET_USER_DATA,
+        payload: decoded.user
+      });
 
-    // eslint-disable-next-line functional/immutable-data
-    document.cookie = `access_token=Bearer ${token}`;
+      // eslint-disable-next-line functional/immutable-data
+      document.cookie = `access_token=Bearer ${token}`;
+    }
   } catch (error) {
     console.log(error);
   }
@@ -60,22 +62,23 @@ export const logInUser = (loginData: IUserLogIn): AppThunk => async (
       data: loginData
     });
 
-    const { token, user }: IUserAuth = response;
+    const { token }: { token: string } = response;
+    const decoded = jwt_decode(token) as IDecoder;
 
-    // TODO: before setting cookie check it
+    if (token) {
+      dispatch({
+        type: AUTHENTICATE_USER,
+        payload: true
+      });
 
-    // Saving token in cookie
-    // eslint-disable-next-line functional/immutable-data
-    document.cookie = `access_token=${token}`;
+      dispatch({
+        type: SET_USER_DATA,
+        payload: decoded.user
+      });
 
-    dispatch({
-      type: AUTHENTICATE_USER,
-      payload: isToken(token)
-    });
-    // dispatch({
-    //   type: SET_USER_DATA,
-    //   payload: user
-    // });
+      // eslint-disable-next-line functional/immutable-data
+      document.cookie = `access_token=Bearer ${token}`;
+    }
   } catch (error) {
     console.log(error);
   }
