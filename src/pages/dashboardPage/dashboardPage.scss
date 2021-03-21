@@ -1,0 +1,30 @@
+@use '../../scss/query' as *;
+@use '../../scss/mixins' as *;
+@use '../../scss/variables' as *;
+@use '../../scss/typography.mixins.scss' as *;
+
+.dashboard {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  @include respond-above(md) {
+    flex-direction: row;
+  }
+
+  .dashboard-profile {
+    padding: 20px 15px;
+    @include respond-above(md) {
+      width: 30%;
+      margin: auto 0;
+    }
+  }
+
+  .dashboard-main {
+    padding: 20px 15px;
+    @include respond-above(md) {
+      width: 70%;
+      display: block;
+    }
+  }
+}
