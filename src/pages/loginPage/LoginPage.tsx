@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
-import IconCrown from "../../icons/IconCrown";
-// image
+import CrownIcon from "../../icons/CrownIcon";
 import sportNumbers from "../../images/sport-numbers.webp";
 import { logInUser } from "../../redux/actions/authAction";
 import { RootStateType } from "../../redux/reducers/reducers";
@@ -37,7 +36,7 @@ const LoginPage: React.FC = () => {
   return (
     <div className="login-page">
       <div className="login-form-container">
-        <IconCrown />
+        <CrownIcon />
         <h1>
           Hey, <br /> Login Now.
         </h1>
