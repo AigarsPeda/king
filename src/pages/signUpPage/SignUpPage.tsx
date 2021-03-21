@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
-import IconCrown from "../../icons/IconCrown";
+import CrownIcon from "../../icons/CrownIcon";
 import volley from "../../images/volley.webp";
 import { signUpUser } from "../../redux/actions/authAction";
 import { RootStateType } from "../../redux/reducers/reducers";
@@ -43,7 +43,7 @@ const SignUpPage: React.FC = () => {
         <img src={volley} alt="black and white bilging" />
       </div>
       <div className="signup-page-form-container">
-        <IconCrown />
+        <CrownIcon />
         <h1>
           Hey, <br /> Create Account Now.
         </h1>
