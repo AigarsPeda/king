@@ -4,6 +4,8 @@
 @use '../../scss/typography.mixins' as *;
 
 .profile {
+  // padding: 20px 15px;
+
   .profile-header {
     display: flex;
     justify-content: space-between;
@@ -24,6 +26,89 @@
       width: 25px;
       height: 25px;
       fill: $secondary-text-color;
+    }
+  }
+
+  .profile-info {
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    .profile-profile-icon-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 3px solid $secondary-text-color;
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      margin: 0 auto;
+
+      .profile-profile-icon {
+        width: 45px;
+        height: 45px;
+        fill: $secondary-text-color;
+      }
+    }
+  }
+
+  .profile-menu-modal {
+    padding: 20px 15px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    text-align: center;
+    background-color: red;
+    transform: translateX(-100%);
+    transition: transform 0.4s ease-in-out;
+    will-change: transform;
+
+    @include respond-above(md) {
+      position: relative;
+      transform: translateX(0);
+      padding: 0;
+    }
+
+    &.toggleIn {
+      transform: translateX(0%);
+
+      @include respond-above(md) {
+        transform: translateX(0);
+      }
+    }
+
+    &.toggleOut {
+      transform: translateX(-100%);
+
+      @include respond-above(md) {
+        transform: translateX(0);
+      }
+    }
+
+    .profile-menu {
+      @include respond-above(md) {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      .profile-close {
+        display: flex;
+        justify-content: flex-end;
+
+        @include respond-above(md) {
+          display: none;
+        }
+
+        .profile-close-icon {
+          width: 25px;
+          height: 25px;
+          fill: $secondary-text-color;
+        }
+      }
     }
   }
 }
