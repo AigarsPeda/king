@@ -4,17 +4,21 @@
 @use '../../scss/typography.mixins' as *;
 
 .profile {
-  // padding: 20px 15px;
-
   .profile-header {
-    display: flex;
-    justify-content: space-between;
-
     .profile-menu-icon {
       width: 25px;
       height: 25px;
       fill: $secondary-text-color;
+
+      @include respond-above(md) {
+        display: none;
+      }
     }
+  }
+
+  .profile-info {
+    margin-bottom: 20px;
+    text-align: center;
 
     .profile-crown-icon {
       width: 50px;
@@ -22,31 +26,56 @@
       fill: $main-text-color;
     }
 
-    .profile-gear-icon {
-      width: 25px;
-      height: 25px;
-      fill: $secondary-text-color;
-    }
-  }
-
-  .profile-info {
-    margin-top: 20px;
-    margin-bottom: 20px;
-
-    .profile-profile-icon-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    .profile-profile-images-container {
       border: 3px solid $secondary-text-color;
       border-radius: 50%;
-      width: 80px;
-      height: 80px;
+      width: 100px;
+      height: 100px;
       margin: 0 auto;
+      object-fit: cover;
 
-      .profile-profile-icon {
-        width: 45px;
-        height: 45px;
-        fill: $secondary-text-color;
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+      }
+    }
+
+    .profile-stats {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+
+      .profile-won {
+        display: flex;
+        align-items: center;
+
+        svg {
+          width: 35px;
+          height: 35px;
+          fill: green;
+          margin-right: 10px;
+        }
+
+        p {
+          color: $secondary-text-color;
+        }
+      }
+
+      .profile-lost {
+        display: flex;
+        align-items: center;
+
+        svg {
+          width: 35px;
+          height: 35px;
+          fill: red;
+          margin-right: 10px;
+        }
+
+        p {
+          color: $secondary-text-color;
+        }
       }
     }
   }
@@ -74,15 +103,12 @@
 
     &.toggleIn {
       transform: translateX(0%);
-
-      @include respond-above(md) {
-        transform: translateX(0);
-      }
     }
 
     &.toggleOut {
       transform: translateX(-100%);
 
+      // remove transform on desktop
       @include respond-above(md) {
         transform: translateX(0);
       }
@@ -92,7 +118,7 @@
       @include respond-above(md) {
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: space-around;
       }
 
       .profile-close {
