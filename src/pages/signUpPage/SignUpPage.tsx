@@ -40,7 +40,7 @@ const SignUpPage: React.FC = () => {
   return (
     <div className="signup-page">
       <div className="signup-page-image-container">
-        <img src={volley} alt="black and white bilging" />
+        <img src={volley} alt="people playing volleyball" />
       </div>
       <div className="signup-page-form-container">
         <CrownIcon />
