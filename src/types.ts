@@ -1,3 +1,5 @@
+export type IToken = string;
+
 export type IUserAuth = {
   user: IUser;
   token: IToken;
@@ -6,7 +8,6 @@ export type IUserAuth = {
 
 export type IDecoder = {
   iat: number;
-  // exp: number;
   user: IUser;
 };
 
@@ -17,8 +18,6 @@ export type IUser = {
   email: string;
   created_on: string;
 };
-
-export type IToken = string;
 
 export type IUserSignUp = {
   name: string;
@@ -46,4 +45,14 @@ export type IGamePlayer = {
   winner: boolean;
   playerName: string;
   gameCreator: boolean;
+};
+
+export type IUserStates = {
+  stats_id: number;
+  points_overall: number;
+  tournaments_played: number;
+  tournaments_won: number;
+  tournaments_lost: number;
+  tournaments_created: number;
+  user_id: number;
 };
