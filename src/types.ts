@@ -56,3 +56,13 @@ export type IUserStates = {
   tournaments_created: number;
   user_id: number;
 };
+
+// export type IGame = {
+// player_array: [{…}, {…}, {…}, {…}, {…}];
+// tournament_created_on: string;
+// tournament_creator_id: number;
+// tournament_ended_on: null | string;
+// tournament_id: number;
+// }
+
+export type IProfileSelectedInfo = "dashboard" | "mystats" | "hottips";
