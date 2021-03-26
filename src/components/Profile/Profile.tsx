@@ -1,25 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CloseIcon from "../../icons/CloseIcon";
 import CrownIcon from "../../icons/CrownIcon";
 import MarkIcon from "../../icons/MarkIcon";
 import MenuIcon from "../../icons/MenuIcon";
 import profile from "../../images/prof.jpeg";
-import { getUserStates } from "../../redux/actions/userActions";
+import { setProfileSelectedInfo } from "../../redux/actions/uiActions";
 import { RootStateType } from "../../redux/reducers/reducers";
+import { IProfileSelectedInfo } from "../../types";
 import MyStats from "../MyStats/MyStats";
 
 const Profile: React.FC = () => {
   const dispatch = useDispatch();
-  const [selectedInfo, setSelectedInfo] = useState<
-    "dashboard" | "mystats" | "hottips"
-  >("dashboard");
   const [toggle, setToggle] = useState(false);
 
-  const { tournamentsWon, tournamentsLost } = useSelector(
+  const { tournamentsWon, tournamentsLost, selectedInfo } = useSelector(
     (state: RootStateType) => ({
       tournamentsWon: state.user.states.tournaments_won,
-      tournamentsLost: state.user.states.tournaments_lost
+      tournamentsLost: state.user.states.tournaments_lost,
+      selectedInfo: state.ui.selectedInfo
     })
   );
 
@@ -27,16 +26,13 @@ const Profile: React.FC = () => {
     setToggle((state) => (state = !state));
   };
 
-  const handleSelectedInfo = (str: "dashboard" | "mystats" | "hottips") => {
-    setSelectedInfo(str);
+  const handleSelectedInfo = (str: IProfileSelectedInfo) => {
+    // saving to state users selected profile info components
+    dispatch(setProfileSelectedInfo(str));
 
-    // to close profile-menu-modal when mobile
+    // to close profile-menu-modal when on mobile
     setToggle(false);
   };
-
-  useEffect(() => {
-    dispatch(getUserStates());
-  }, [dispatch]);
 
   return (
     <div className="profile">
