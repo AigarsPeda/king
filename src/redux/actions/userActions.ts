@@ -1,8 +1,13 @@
 import { ThunkAction } from "redux-thunk";
 import { callAPI } from "../../services/callAPI";
-import { RootStateType } from "../reducers";
-import { SET_USER_DATA, UserActionTypes } from "../types/user.types";
-import { IUser } from "../../types";
+
+import { IUser, IUserStates } from "../../types";
+import { RootStateType } from "../reducers/reducers";
+import {
+  SET_USER_DATA,
+  SET_USER_STATES,
+  UserActionTypes
+} from "../types/userTypes";
 
 type AppThunk<ReturnType = void> = ThunkAction<
   ReturnType,
@@ -11,10 +16,9 @@ type AppThunk<ReturnType = void> = ThunkAction<
   UserActionTypes
 >;
 
-// get all cards
 export const getUser = (): AppThunk => async (dispatch) => {
   try {
-    // in callAPI if there are token in REDUX STORE
+    // in callAPI if there are token in cookie
     // it is added to AUTHORIZATION headers
     const response: IUser = await callAPI({
       url: "/user",
@@ -23,6 +27,24 @@ export const getUser = (): AppThunk => async (dispatch) => {
 
     dispatch({
       type: SET_USER_DATA,
+      payload: response
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getUserStates = (): AppThunk => async (dispatch) => {
+  try {
+    // in callAPI if there are token in cookie
+    // it is added to AUTHORIZATION headers
+    const response: IUserStates = await callAPI({
+      url: "/user/stats",
+      method: "GET"
+    });
+
+    dispatch({
+      type: SET_USER_STATES,
       payload: response
     });
   } catch (error) {
