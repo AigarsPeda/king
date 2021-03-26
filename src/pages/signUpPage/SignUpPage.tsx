@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
+import { validatePassword } from "../../helpers/validatePassword";
 import CrownIcon from "../../icons/CrownIcon";
 import volley from "../../images/volley.webp";
 import { signUpUser } from "../../redux/actions/authAction";
@@ -12,12 +13,18 @@ const SignUpPage: React.FC = () => {
     isAuthenticated: state.auth.isAuthenticated
   }));
 
+  const [checked, setChecked] = useState(false);
+
   const [user, setUser] = useState({
     name: "",
     surname: "",
     email: "",
-    password: ""
+    password: "",
+    confirmPassword: ""
   });
+
+  const [termsError, setTermsError] = useState<string | undefined>();
+  const [passwordError, setPasswordError] = useState<string | undefined>();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -27,9 +34,37 @@ const SignUpPage: React.FC = () => {
     }));
   };
 
+  const checkBoxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setChecked(e.target.checked);
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(signUpUser(user));
+
+    if (!checked) {
+      return setTermsError("You must agree with Terms of Service");
+    } else {
+      setTermsError(undefined);
+    }
+
+    const passwordValidationError = validatePassword(
+      user.password,
+      user.confirmPassword
+    );
+
+    if (passwordValidationError) {
+      return setPasswordError(passwordValidationError);
+    } else {
+      setPasswordError(undefined);
+    }
+
+    const signUpUserData = {
+      name: user.name,
+      surname: user.surname,
+      email: user.email,
+      password: user.password
+    };
+    dispatch(signUpUser(signUpUserData));
   };
 
   // after sign up redirect
@@ -83,8 +118,23 @@ const SignUpPage: React.FC = () => {
             name="password"
             autoComplete="off"
           />
+          <input
+            placeholder="Confirm Your password"
+            type="password"
+            value={user.confirmPassword}
+            onChange={handleChange}
+            name="confirmPassword"
+            autoComplete="off"
+          />
+          {passwordError && <p>{passwordError}</p>}
           <div className="terms">
-            <input type="checkbox" name="terms" value="true" />
+            <input
+              type="checkbox"
+              name="terms"
+              checked={checked}
+              onChange={checkBoxChange}
+            />
+            {termsError && <p>{termsError}</p>}
             <label htmlFor="terms">
               <Link to="/terms">I’m okay with Terms of Service</Link>
             </label>
