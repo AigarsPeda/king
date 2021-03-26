@@ -60,7 +60,7 @@
         .profile-mark-icon {
           width: 12px;
           height: 12px;
-          fill: green;
+          fill: rgb(54, 162, 235);
         }
 
         p {
@@ -75,7 +75,7 @@
         .profile-close-icon {
           width: 12px;
           height: 12px;
-          fill: red;
+          fill: rgb(255, 99, 132);
         }
 
         p {
@@ -125,6 +125,7 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        margin-bottom: 15px;
       }
 
       .profile-close {
@@ -189,7 +190,7 @@
 
         &.selected::before {
           content: "";
-          border-bottom: 2px solid red;
+          border-bottom: 2px solid rgb(255, 99, 132);
           padding: 0;
           position: absolute;
           bottom: 0;
