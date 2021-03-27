@@ -2,7 +2,7 @@ import { ThunkAction } from "redux-thunk";
 import { callAPI } from "../../services/callAPI";
 import { IGame } from "../../types";
 import { RootStateType } from "../reducers/reducers";
-import { GamesActionTypes } from "../types/gameTypes";
+import { GamesActionTypes } from "../types/gamesTypes";
 
 type AppThunk<ReturnType = void> = ThunkAction<
   ReturnType,
@@ -17,5 +17,8 @@ export const getAllGames = (): AppThunk => async (dispatch) => {
     method: "GET"
   });
 
-  console.log("response: ", response);
+  dispatch({
+    type: "SET_USERS_GAMES",
+    payload: response
+  });
 };
