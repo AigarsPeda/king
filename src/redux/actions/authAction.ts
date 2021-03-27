@@ -1,11 +1,16 @@
 import jwt_decode from "jwt-decode";
 import { ThunkAction } from "redux-thunk";
-import { isToken } from "../../helpers/isToken";
 import { callAPI } from "../../services/callAPI";
-import { IDecoder, IUserAuth, IUserLogIn, IUserSignUp } from "../../types";
+import { IDecoder, IUserLogIn, IUserSignUp } from "../../types";
 import { RootStateType } from "../reducers/reducers";
 import { AuthenticateActionTypes, AUTHENTICATE_USER } from "../types/authTypes";
-import { SET_USER_DATA, UserActionTypes } from "../types/userTypes";
+import {
+  SET_USER_DATA,
+  SET_USER_DATA_LOADING,
+  SET_USER_DATA_NOT_LOADING,
+  UserActionTypes
+} from "../types/userTypes";
+import { getAllGames } from "./gamesActions";
 
 type AppThunk<ReturnType = void> = ThunkAction<
   ReturnType,
@@ -14,12 +19,15 @@ type AppThunk<ReturnType = void> = ThunkAction<
   AuthenticateActionTypes | UserActionTypes
 >;
 
-const isTokenExpired = (exp: number) => Date.now() >= exp * 1000;
+// const isTokenExpired = (exp: number) => Date.now() >= exp * 1000;
 
-// create new user
 export const signUpUser = (signUpData: IUserSignUp): AppThunk => async (
   dispatch
 ) => {
+  dispatch({
+    type: SET_USER_DATA_LOADING
+  });
+
   try {
     const response = await callAPI({
       url: "/signup",
@@ -27,10 +35,15 @@ export const signUpUser = (signUpData: IUserSignUp): AppThunk => async (
       data: signUpData
     });
 
-    const { token }: { token: string } = response;
+    console.log("response: ", response);
+
+    const { token, error }: { token: string; error?: string } = response;
     const decoded = jwt_decode(token) as IDecoder;
 
-    console.log("decoded: ", decoded);
+    // TODO: do something with error
+    if (error) {
+      return console.log("Signup error: ", error);
+    }
 
     if (token) {
       dispatch({
@@ -45,25 +58,37 @@ export const signUpUser = (signUpData: IUserSignUp): AppThunk => async (
 
       // eslint-disable-next-line functional/immutable-data
       document.cookie = `access_token=Bearer ${token}`;
+
+      // getting all users games to display them in dashboard
+      // after sign up
+      dispatch(getAllGames());
     }
   } catch (error) {
     console.log(error);
   }
 };
 
-// login user
 export const logInUser = (loginData: IUserLogIn): AppThunk => async (
   dispatch
 ) => {
   try {
+    dispatch({
+      type: SET_USER_DATA_LOADING
+    });
+
     const response = await callAPI({
       url: "/login",
       method: "POST",
       data: loginData
     });
 
-    const { token }: { token: string } = response;
+    const { token, error }: { token: string; error?: string } = response;
     const decoded = jwt_decode(token) as IDecoder;
+
+    // TODO: do something with error
+    if (error) {
+      return console.log("Login error: ", error);
+    }
 
     if (token) {
       dispatch({
@@ -78,9 +103,17 @@ export const logInUser = (loginData: IUserLogIn): AppThunk => async (
 
       // eslint-disable-next-line functional/immutable-data
       document.cookie = `access_token=Bearer ${token}`;
+
+      // getting all users games to display them in dashboard
+      // after log up
+      dispatch(getAllGames());
     }
   } catch (error) {
     console.log(error);
+
+    dispatch({
+      type: SET_USER_DATA_NOT_LOADING
+    });
   }
 };
 
