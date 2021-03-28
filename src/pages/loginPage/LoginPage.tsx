@@ -12,9 +12,12 @@ const LoginPage: React.FC = () => {
     password: ""
   });
   const dispatch = useDispatch();
-  const { isAuthenticated } = useSelector((state: RootStateType) => ({
-    isAuthenticated: state.auth.isAuthenticated
-  }));
+  const { isAuthenticated, isUserDataLoading } = useSelector(
+    (state: RootStateType) => ({
+      isAuthenticated: state.auth.isAuthenticated,
+      isUserDataLoading: state.user.isUserDataLoading
+    })
+  );
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -60,7 +63,13 @@ const LoginPage: React.FC = () => {
             name="password"
             autoComplete="off"
           />
-          <button type="submit">Login</button>
+          <button
+            type="submit"
+            disabled={isUserDataLoading}
+            className={`${isUserDataLoading ? "loading" : ""}`}
+          >
+            {!isUserDataLoading && "Login"}
+          </button>
         </form>
         <div className="login-options">
           <p>Forgot Password /</p> <Link to="/reset">Reset</Link>
