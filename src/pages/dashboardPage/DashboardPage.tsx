@@ -1,11 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Profile from "../../components/Profile/Profile";
-import { getAllGames } from "../../redux/actions/gamesActions";
 import { RootStateType } from "../../redux/reducers/reducers";
 
 const DashboardPage: React.FC = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const { games } = useSelector((state: RootStateType) => ({
     games: state.games.games
@@ -19,9 +18,9 @@ const DashboardPage: React.FC = () => {
    * log in or sign up
    * because they are needed at the start * */
 
-  useEffect(() => {
-    dispatch(getAllGames());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getAllGames());
+  // }, [dispatch]);
 
   return (
     <div className="dashboard">
