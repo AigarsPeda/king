@@ -3,11 +3,9 @@
 @use '../../scss/variables' as *;
 @use '../../scss/typography.mixins.scss' as *;
 
-
 .login-page {
   display: flex;
   width: 100%;
-
 
   .login-form-container {
     width: 100%;
@@ -20,14 +18,12 @@
       // padding-top: 130px;
     }
 
-
     svg {
       width: 50px;
       height: 50px;
       fill: $main-text-color;
       margin-bottom: 1.5rem;
     }
-
 
     h1 {
       @include h1-bold-mobile;
@@ -55,11 +51,7 @@
       }
     }
 
-
-
-
     form {
-
       input {
         display: block;
         width: 100%;
@@ -79,7 +71,6 @@
       //   justify-content: flex-start;
       //   align-items: center;
       //   margin-bottom: 30px;
-
 
       //   input {
       //     width: 14px;
@@ -112,8 +103,34 @@
         color: $light-text-color;
         height: 40px;
         margin-bottom: 15px;
-      }
+        position: relative;
 
+        &.loading::after {
+          content: "";
+          position: absolute;
+          width: 16px;
+          height: 16px;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          margin: auto;
+          border: 4px solid transparent;
+          border-top-color: #ffffff;
+          border-radius: 50%;
+          animation: button-loading-spinner 1s ease infinite;
+        }
+      }
+    }
+  }
+
+  @keyframes button-loading-spinner {
+    from {
+      transform: rotate(0turn);
+    }
+
+    to {
+      transform: rotate(1turn);
     }
   }
 
@@ -131,7 +148,6 @@
         display: block;
       }
     }
-
   }
 
   .login-page-error {
