@@ -9,9 +9,12 @@ import { RootStateType } from "../../redux/reducers/reducers";
 
 const SignUpPage: React.FC = () => {
   const dispatch = useDispatch();
-  const { isAuthenticated } = useSelector((state: RootStateType) => ({
-    isAuthenticated: state.auth.isAuthenticated
-  }));
+  const { isAuthenticated, isUserDataLoading } = useSelector(
+    (state: RootStateType) => ({
+      isAuthenticated: state.auth.isAuthenticated,
+      isUserDataLoading: state.user.isUserDataLoading
+    })
+  );
 
   const [checked, setChecked] = useState(false);
 
@@ -139,7 +142,13 @@ const SignUpPage: React.FC = () => {
               <Link to="/terms">I’m okay with Terms of Service</Link>
             </label>
           </div>
-          <button type="submit">Sign Up</button>
+          <button
+            type="submit"
+            disabled={isUserDataLoading}
+            className={`${isUserDataLoading ? "loading" : ""}`}
+          >
+            {!isUserDataLoading && "Login"}
+          </button>
         </form>
       </div>
     </div>
