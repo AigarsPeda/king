@@ -95,6 +95,12 @@
       //   }
       // }
 
+      .login-page-error {
+        color: $danger-color;
+        text-transform: capitalize;
+        margin-bottom: 10px;
+      }
+
       button {
         width: 100%;
         border: none;
