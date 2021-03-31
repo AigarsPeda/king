@@ -7,13 +7,16 @@ import { logInUser } from "../../redux/actions/authAction";
 import { RootStateType } from "../../redux/reducers/reducers";
 
 const LoginPage: React.FC = () => {
+  const dispatch = useDispatch();
+
   const [user, setUser] = useState({
     email: "",
     password: ""
   });
-  const dispatch = useDispatch();
-  const { isAuthenticated, isUserDataLoading } = useSelector(
+
+  const { authError, isAuthenticated, isUserDataLoading } = useSelector(
     (state: RootStateType) => ({
+      authError: state.errors.authError,
       isAuthenticated: state.auth.isAuthenticated,
       isUserDataLoading: state.user.isUserDataLoading
     })
@@ -63,6 +66,7 @@ const LoginPage: React.FC = () => {
             name="password"
             autoComplete="off"
           />
+          {authError && <div className="login-page-error">* {authError}</div>}
           <button
             type="submit"
             disabled={isUserDataLoading}
