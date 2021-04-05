@@ -2,11 +2,9 @@ import { IUser, IUserStates } from "../../types";
 import {
   CLEAR_USER_DATA,
   SET_USER_DATA,
-  SET_USER_DATA_LOADING,
-  SET_USER_DATA_NOT_LOADING,
+  SET_USER_DATA_LOADING_SATE,
   SET_USER_STATES,
-  SET_USER_STATES_LOADING,
-  SET_USER_STATES_NOT_LOADING,
+  SET_USER_STATES_LOADING_STATE,
   UserActionTypes
 } from "../types/userTypes";
 
@@ -51,16 +49,10 @@ export const userReducer = (
         isUserDataLoading: false
       };
 
-    case SET_USER_DATA_LOADING:
+    case SET_USER_DATA_LOADING_SATE:
       return {
         ...state,
-        isUserDataLoading: true
-      };
-
-    case SET_USER_DATA_NOT_LOADING:
-      return {
-        ...state,
-        isUserDataLoading: false
+        isUserDataLoading: action.payload
       };
 
     case SET_USER_STATES:
@@ -70,16 +62,10 @@ export const userReducer = (
         isUserStatesLoading: false
       };
 
-    case SET_USER_STATES_LOADING:
+    case SET_USER_STATES_LOADING_STATE:
       return {
         ...state,
-        isUserStatesLoading: true
-      };
-
-    case SET_USER_STATES_NOT_LOADING:
-      return {
-        ...state,
-        isUserStatesLoading: false
+        isUserStatesLoading: action.payload
       };
 
     case CLEAR_USER_DATA:
