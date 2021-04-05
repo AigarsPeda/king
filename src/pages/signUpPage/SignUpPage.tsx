@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
-import { validatePassword } from "../../helpers/validatePassword";
+import { validateCreateUser } from "../../helpers/validateCreateUser";
 import CrownIcon from "../../icons/CrownIcon";
 import volley from "../../images/volley.webp";
 import { signUpUser } from "../../redux/actions/authAction";
@@ -9,8 +9,9 @@ import { RootStateType } from "../../redux/reducers/reducers";
 
 const SignUpPage: React.FC = () => {
   const dispatch = useDispatch();
-  const { isAuthenticated, isUserDataLoading } = useSelector(
+  const { authError, isAuthenticated, isUserDataLoading } = useSelector(
     (state: RootStateType) => ({
+      authError: state.errors.authError,
       isAuthenticated: state.auth.isAuthenticated,
       isUserDataLoading: state.user.isUserDataLoading
     })
@@ -26,8 +27,7 @@ const SignUpPage: React.FC = () => {
     confirmPassword: ""
   });
 
-  const [termsError, setTermsError] = useState<string | undefined>();
-  const [passwordError, setPasswordError] = useState<string | undefined>();
+  const [error, setError] = useState<string | undefined>();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -44,29 +44,26 @@ const SignUpPage: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!checked) {
-      return setTermsError("You must agree with Terms of Service");
-    } else {
-      setTermsError(undefined);
-    }
-
-    const passwordValidationError = validatePassword(
-      user.password,
-      user.confirmPassword
-    );
-
-    if (passwordValidationError) {
-      return setPasswordError(passwordValidationError);
-    } else {
-      setPasswordError(undefined);
+    if (user.password !== user.confirmPassword) {
+      setError("passwords don't match");
+      return;
     }
 
     const signUpUserData = {
       name: user.name,
       surname: user.surname,
       email: user.email,
-      password: user.password
+      password: user.password,
+      terms: checked
     };
+
+    const { isValid, errorMessage } = validateCreateUser(signUpUserData);
+
+    if (!isValid) {
+      setError(errorMessage);
+      return;
+    }
+
     dispatch(signUpUser(signUpUserData));
   };
 
@@ -129,7 +126,6 @@ const SignUpPage: React.FC = () => {
             name="confirmPassword"
             autoComplete="off"
           />
-          {passwordError && <p>{passwordError}</p>}
           <div className="terms">
             <input
               type="checkbox"
@@ -137,15 +133,16 @@ const SignUpPage: React.FC = () => {
               checked={checked}
               onChange={checkBoxChange}
             />
-            {termsError && <p>{termsError}</p>}
             <label htmlFor="terms">
               <Link to="/terms">I’m okay with Terms of Service</Link>
             </label>
           </div>
+          {error && <div className="signup-page-error">* {error}</div>}
+          {authError && <div className="signup-page-error">* {authError}</div>}
           <button
             type="submit"
             disabled={isUserDataLoading}
-            className={`${isUserDataLoading ? "loading" : ""}`}
+            className={`${isUserDataLoading && "loading"}`}
           >
             {!isUserDataLoading && "Login"}
           </button>
