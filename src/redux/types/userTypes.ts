@@ -6,14 +6,10 @@ interface ISetUserAction {
   payload: IUser;
 }
 
-export const SET_USER_DATA_LOADING = "SET_USER_DATA_LOADING";
+export const SET_USER_DATA_LOADING_SATE = "SET_USER_DATA_LOADING_SATE";
 interface ISetUserDataLoadingAction {
-  type: typeof SET_USER_DATA_LOADING;
-}
-
-export const SET_USER_DATA_NOT_LOADING = "SET_USER_DATA_NOT_LOADING";
-interface ISetUserDataNotLoadingAction {
-  type: typeof SET_USER_DATA_NOT_LOADING;
+  type: typeof SET_USER_DATA_LOADING_SATE;
+  payload: boolean;
 }
 
 export const SET_USER_STATES = "SET_USER_STATES";
@@ -22,14 +18,10 @@ interface ISetUserStatesAction {
   payload: IUserStates;
 }
 
-export const SET_USER_STATES_LOADING = "SET_USER_STATES_LOADING";
+export const SET_USER_STATES_LOADING_STATE = "SET_USER_STATES_LOADING_STATE";
 interface ISetUserStatesLoadingAction {
-  type: typeof SET_USER_STATES_LOADING;
-}
-
-export const SET_USER_STATES_NOT_LOADING = "SET_USER_STATES_NOT_LOADING";
-interface ISetUserStatesNotLoadingAction {
-  type: typeof SET_USER_STATES_NOT_LOADING;
+  type: typeof SET_USER_STATES_LOADING_STATE;
+  payload: boolean;
 }
 
 export const CLEAR_USER_DATA = "CLEAR_USER_DATA";
@@ -42,6 +34,4 @@ export type UserActionTypes =
   | IClearUserDataAction
   | ISetUserStatesAction
   | ISetUserDataLoadingAction
-  | ISetUserStatesLoadingAction
-  | ISetUserDataNotLoadingAction
-  | ISetUserStatesNotLoadingAction;
+  | ISetUserStatesLoadingAction;
