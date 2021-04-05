@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
+import { validateLoginUser } from "../../helpers/validateLoginUser";
 import CrownIcon from "../../icons/CrownIcon";
 import sportNumbers from "../../images/sport-numbers.webp";
 import { logInUser } from "../../redux/actions/authAction";
@@ -13,6 +14,7 @@ const LoginPage: React.FC = () => {
     email: "",
     password: ""
   });
+  const [error, setError] = useState<string | undefined>();
 
   const { authError, isAuthenticated, isUserDataLoading } = useSelector(
     (state: RootStateType) => ({
@@ -32,7 +34,23 @@ const LoginPage: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(logInUser(user));
+
+    const { isValid, errorMessage } = validateLoginUser({
+      email: user.email,
+      password: user.password
+    });
+
+    if (!isValid) {
+      setError(errorMessage);
+      return;
+    }
+
+    dispatch(
+      logInUser({
+        email: user.email,
+        password: user.password
+      })
+    );
   };
 
   if (isAuthenticated) {
@@ -66,11 +84,12 @@ const LoginPage: React.FC = () => {
             name="password"
             autoComplete="off"
           />
+          {error && <div className="login-page-error">* {error}</div>}
           {authError && <div className="login-page-error">* {authError}</div>}
           <button
             type="submit"
             disabled={isUserDataLoading}
-            className={`${isUserDataLoading ? "loading" : ""}`}
+            className={`${isUserDataLoading && "loading"}`}
           >
             {!isUserDataLoading && "Login"}
           </button>
