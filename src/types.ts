@@ -24,6 +24,7 @@ export type IUserSignUp = {
   surname: string;
   email: string;
   password: string;
+  terms: boolean;
 };
 
 export type IUserLogIn = {
