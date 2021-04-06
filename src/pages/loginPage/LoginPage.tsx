@@ -9,13 +9,6 @@ import { RootStateType } from "../../redux/reducers/reducers";
 
 const LoginPage: React.FC = () => {
   const dispatch = useDispatch();
-
-  const [user, setUser] = useState({
-    email: "",
-    password: ""
-  });
-  const [error, setError] = useState<string | undefined>();
-
   const { authError, isAuthenticated, isUserDataLoading } = useSelector(
     (state: RootStateType) => ({
       authError: state.errors.authError,
@@ -23,6 +16,12 @@ const LoginPage: React.FC = () => {
       isUserDataLoading: state.user.isUserDataLoading
     })
   );
+
+  const [error, setError] = useState<string | undefined>();
+  const [user, setUser] = useState({
+    email: "",
+    password: ""
+  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -53,6 +52,7 @@ const LoginPage: React.FC = () => {
     );
   };
 
+  // After log in redirect
   if (isAuthenticated) {
     return <Redirect to="/" />;
   }
@@ -68,22 +68,35 @@ const LoginPage: React.FC = () => {
           <p>If you are new /</p> <Link to="/signup">Create Account</Link>
         </div>
         <form onSubmit={handleSubmit}>
-          <input
-            placeholder="Your email"
-            type="email"
-            value={user.email}
-            onChange={handleChange}
-            name="email"
-            autoComplete="on"
-          />
-          <input
-            placeholder="Your password"
-            type="password"
-            value={user.password}
-            onChange={handleChange}
-            name="password"
-            autoComplete="off"
-          />
+          <div className="login-page-form-field">
+            <input
+              className="login-page-form-input"
+              placeholder=" "
+              type="email"
+              value={user.email}
+              onChange={handleChange}
+              name="email"
+              autoComplete="off"
+            />
+            <label htmlFor="email" className="login-page-form-label">
+              Email
+            </label>
+          </div>
+          <div className="login-page-form-field">
+            <input
+              className="login-page-form-input"
+              placeholder=" "
+              type="password"
+              value={user.password}
+              onChange={handleChange}
+              name="password"
+              autoComplete="off"
+            />
+            <label htmlFor="password" className="login-page-form-label">
+              Password
+            </label>
+          </div>
+
           {error && <div className="login-page-error">* {error}</div>}
           {authError && <div className="login-page-error">* {authError}</div>}
           <button
