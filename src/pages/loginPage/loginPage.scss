@@ -9,13 +9,12 @@
 
   .login-form-container {
     width: 100%;
-    padding: 75px 50px;
-    margin: auto;
+    padding: 25px 25px;
 
     @include respond-above(md) {
       width: 35%;
       margin: auto 0;
-      // padding-top: 130px;
+      padding: 75px 50px;
     }
 
     svg {
@@ -52,52 +51,75 @@
     }
 
     form {
-      input {
-        display: block;
+      .login-page-form-field {
         width: 100%;
-        height: 40px;
-        border: 2px solid $border-color;
-        border-radius: 6px;
-        margin-bottom: 12px;
-        padding: 15px 10px;
-        font-weight: 500;
-        line-height: 1.5;
-        font-size: 0.875rem; // 14px
-        color: $main-text-color;
+        margin: 0 auto;
+        position: relative;
+        border-bottom: 2px solid $border-color;
+        margin: 3rem auto 1rem;
+        transition: 500ms;
       }
 
-      // .terms {
-      //   display: flex;
-      //   justify-content: flex-start;
-      //   align-items: center;
-      //   margin-bottom: 30px;
+      .login-page-form-label {
+        color: $border-color;
+        font-size: 1rem;
+      }
 
-      //   input {
-      //     width: 14px;
-      //     height: 14px;
-      //     margin: 0 10px 0 0;
-      //     border: 2px solid $border-color;
-      //     transform: scale(1.2);
-      //   }
+      .login-page-form-input {
+        outline: none;
+        border: none;
+        overflow: hidden;
+        margin: 0;
+        width: 100%;
+        padding: 0.25rem 0;
+        background: none;
+        color: $main-text-color;
+        font-size: 1.2em;
+        font-weight: bold;
+        transition: border 500ms;
+      }
 
-      //   label {
+      /* Border animation */
+      .login-page-form-field::after {
+        content: "";
+        position: relative;
+        display: block;
+        height: 3px;
+        width: 100%;
+        background: $accent-color;
+        transform: scaleX(0);
+        transform-origin: 0%;
+        opacity: 0;
+        transition: all 500ms ease;
+        top: 2px;
+      }
 
-      //     a {
-      //       @include a-secondary-semi-bold-mobile;
-      //       text-decoration: none;
-      //       color: $main-text-color;
+      .login-page-form-field:focus-within {
+        border-color: transparent;
+      }
 
-      //       &:visited {
-      //         color: $main-text-color;
-      //       }
-      //     }
+      .login-page-form-field:focus-within::after {
+        transform: scaleX(1);
+        opacity: 1;
+      }
 
-      //   }
-      // }
+      .login-page-form-label {
+        z-index: -1;
+        position: absolute;
+        transform: translateY(0rem);
+        left: 0;
+        transform-origin: 0%;
+        transition: transform 400ms;
+      }
+
+      .login-page-form-field:focus-within .login-page-form-label,
+      .login-page-form-input:not(:placeholder-shown) + .login-page-form-label {
+        transform: scale(0.8) translateY(-2rem);
+        opacity: 1;
+      }
 
       .login-page-error {
         color: $danger-color;
-        text-transform: capitalize;
         margin-bottom: 10px;
       }
 
