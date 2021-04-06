@@ -17,8 +17,8 @@ const SignUpPage: React.FC = () => {
     })
   );
 
+  const [error, setError] = useState<string | undefined>();
   const [checked, setChecked] = useState(false);
-
   const [user, setUser] = useState({
     name: "",
     surname: "",
@@ -26,8 +26,6 @@ const SignUpPage: React.FC = () => {
     password: "",
     confirmPassword: ""
   });
-
-  const [error, setError] = useState<string | undefined>();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -67,7 +65,7 @@ const SignUpPage: React.FC = () => {
     dispatch(signUpUser(signUpUserData));
   };
 
-  // after sign up redirect
+  // After sign up redirect
   if (isAuthenticated) {
     return <Redirect to="/" />;
   }
