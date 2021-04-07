@@ -21,7 +21,11 @@
       width: 50px;
       height: 50px;
       fill: $main-text-color;
-      margin-bottom: 1.5rem;
+      margin-bottom: 0.2rem;
+
+      @include respond-above(md) {
+        margin-bottom: 1.5rem;
+      }
     }
 
     h1 {
@@ -129,9 +133,14 @@
         border-radius: 6px;
         background-color: $primary-accent-color;
         color: $light-text-color;
-        height: 40px;
-        margin-bottom: 15px;
+        height: 50px;
+        margin-bottom: 20px;
+        margin-top: 20px;
         position: relative;
+
+        @include respond-above(md) {
+          height: 40px;
+        }
 
         &.loading::after {
           content: "";
