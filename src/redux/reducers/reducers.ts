@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { authReducer } from "./authReducer";
+import { errorsReducer } from "./errorsReducer";
 import { gamesReducer } from "./gamesReducer";
 import { UIReducer } from "./uiReducer";
 import { userReducer } from "./userReducer";
@@ -9,6 +10,7 @@ import { userReducer } from "./userReducer";
 // COMBINED REDUCERS
 const reducers = {
   games: gamesReducer,
+  errors: errorsReducer,
   auth: authReducer,
   user: userReducer,
   ui: UIReducer
