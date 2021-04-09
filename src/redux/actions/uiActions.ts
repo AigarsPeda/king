@@ -11,12 +11,12 @@ type AppThunk<ReturnType = void> = ThunkAction<
 >;
 
 export const setProfileSelectedInfo = (
-  str: IProfileSelectedInfo
+  selectedInfoComponent: IProfileSelectedInfo
 ): AppThunk => async (dispatch) => {
   try {
     dispatch({
       type: SET_PROFILE_SELECTED_INFO,
-      payload: str
+      payload: selectedInfoComponent
     });
   } catch (error) {
     console.log(error);
