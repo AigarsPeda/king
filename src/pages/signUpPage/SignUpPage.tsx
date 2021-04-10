@@ -84,46 +84,79 @@ const SignUpPage: React.FC = () => {
           <p>Already have an account /</p> <Link to="/login">Log In Now</Link>
         </div>
         <form onSubmit={handleSubmit}>
-          <input
-            placeholder="Your name"
-            type="text"
-            value={user.name}
-            onChange={handleChange}
-            name="name"
-            autoComplete="on"
-          />
-          <input
-            placeholder="Your surname"
-            type="text"
-            value={user.surname}
-            onChange={handleChange}
-            name="surname"
-            autoComplete="on"
-          />
-          <input
-            placeholder="Your email"
-            type="email"
-            value={user.email}
-            onChange={handleChange}
-            name="email"
-            autoComplete="on"
-          />
-          <input
-            placeholder="Your password"
-            type="password"
-            value={user.password}
-            onChange={handleChange}
-            name="password"
-            autoComplete="off"
-          />
-          <input
-            placeholder="Confirm Your password"
-            type="password"
-            value={user.confirmPassword}
-            onChange={handleChange}
-            name="confirmPassword"
-            autoComplete="off"
-          />
+          <div className="signup-page-form-field">
+            <input
+              className="signup-page-form-input"
+              placeholder=" "
+              type="text"
+              value={user.name}
+              onChange={handleChange}
+              name="surname"
+              autoComplete="off"
+            />
+            <label htmlFor="name" className="signup-page-form-label">
+              Name
+            </label>
+          </div>
+          <div className="signup-page-form-field">
+            <input
+              className="signup-page-form-input"
+              placeholder=" "
+              type="text"
+              value={user.surname}
+              onChange={handleChange}
+              name="surname"
+              autoComplete="off"
+            />
+            <label htmlFor="surname" className="signup-page-form-label">
+              Surname
+            </label>
+          </div>
+          <div className="signup-page-form-field">
+            <input
+              className="signup-page-form-input"
+              placeholder=" "
+              type="email"
+              value={user.email}
+              onChange={handleChange}
+              name="surname"
+              autoComplete="off"
+            />
+            <label htmlFor="email" className="signup-page-form-label">
+              Email
+            </label>
+          </div>
+          <div className="signup-page-form-field">
+            <input
+              className="signup-page-form-input"
+              placeholder=" "
+              type="password"
+              value={user.password}
+              onChange={handleChange}
+              name="password"
+              autoComplete="off"
+            />
+            <label htmlFor="password" className="signup-page-form-label">
+              Password
+            </label>
+          </div>
+          <div className="signup-page-form-field">
+            <input
+              className="signup-page-form-input"
+              placeholder=" "
+              type="password"
+              value={user.confirmPassword}
+              onChange={handleChange}
+              name="confirmPassword"
+              autoComplete="off"
+            />
+            <label
+              htmlFor="confirm password"
+              className="signup-page-form-label"
+            >
+              Confirm password
+            </label>
+          </div>
           <div className="terms">
             <input
               type="checkbox"
