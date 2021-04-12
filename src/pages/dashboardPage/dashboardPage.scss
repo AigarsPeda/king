@@ -14,17 +14,26 @@
 
   .dashboard-profile {
     padding: 20px 15px;
+
     @include respond-above(md) {
-      width: 30%;
+      width: 20%;
       margin: auto 0;
     }
   }
 
   .dashboard-main {
     padding: 20px 15px;
+
     @include respond-above(md) {
-      width: 70%;
-      display: block;
+      width: 60%;
+    }
+  }
+
+  .dashboard-game-history {
+    background-color: red;
+
+    @include respond-above(md) {
+      width: 20%;
     }
   }
 }
