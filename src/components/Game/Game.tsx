@@ -9,8 +9,10 @@ const Game: React.FC = () => {
     console.log(value);
   };
 
+  const inputsCountArray = new Array(4);
+
   return (
-    <div>
+    <div className="game">
       <label htmlFor="player count">Select player count:</label>
 
       <select
@@ -25,6 +27,15 @@ const Game: React.FC = () => {
         <option value="4">4</option>
         <option value="5">5</option>
       </select>
+
+      {inputsCountArray.map((_, index) => {
+        return (
+          <div key={index}>
+            <label htmlFor="player name">Player Name</label>
+            <input type="text" />
+          </div>
+        );
+      })}
     </div>
   );
 };
