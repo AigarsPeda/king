@@ -5,13 +5,12 @@ import ShareIcon from "../../icons/ShareIcon";
 const DashboardControls: React.FC = () => {
   return (
     <div className="dashboard-controls">
-      <h1>Controls</h1>
-      <div className="dashboard-icon">
-        <PlusIcon />
-      </div>
-      <div className="dashboard-icon">
-        <ShareIcon />
-      </div>
+      <button className="plus">
+        New Game <PlusIcon />
+      </button>
+      <button className="share">
+        Share <ShareIcon />
+      </button>
     </div>
   );
 };
