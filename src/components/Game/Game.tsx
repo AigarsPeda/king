@@ -2,6 +2,26 @@ import React, { useState } from "react";
 
 const Game: React.FC = () => {
   const [playerCount, setPlayerCount] = useState<number>(0);
+  const [players, setPlayers] = useState({
+    playerName: ""
+  });
+
+  // "playerArray": [
+  //   {
+  //       "playerName": "Aigars",
+  //       "gameCreator": true,
+  //       "winner": true,
+  //       "score": "21",
+  //       "id": "1"
+  //   },
+  //   {
+  //       "playerName": "Oskars",
+  //       "gameCreator": false,
+  //       "winner": false,
+  //       "score": "18",
+  //       "id": "2"
+  //   }
+  // ]
 
   const handleChange = (event: React.FormEvent<HTMLSelectElement>) => {
     const value = parseInt(event.currentTarget.value, 10);
@@ -9,7 +29,21 @@ const Game: React.FC = () => {
     console.log(value);
   };
 
-  const inputsCountArray = new Array(4);
+  const createInputs = () => {
+    const inputsArray: JSX.Element[] = [];
+    for (let i = 0; i < playerCount; i++) {
+      inputsArray.push(<input className="game-input" key={i}></input>);
+    }
+    return inputsArray;
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setPlayers((state) => ({
+      ...state,
+      [name]: value
+    }));
+  };
 
   return (
     <div className="game">
@@ -28,14 +62,7 @@ const Game: React.FC = () => {
         <option value="5">5</option>
       </select>
 
-      {inputsCountArray.map((_, index) => {
-        return (
-          <div key={index}>
-            <label htmlFor="player name">Player Name</label>
-            <input type="text" />
-          </div>
-        );
-      })}
+      {createInputs()}
     </div>
   );
 };
