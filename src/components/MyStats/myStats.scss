@@ -1,3 +1,8 @@
+@use '../../scss/mixins' as *;
+@use '../../scss/variables' as *;
+@use '../../scss/query.scss' as *;
+@use '../../scss/typography.mixins.scss' as *;
+
 .my-stats {
   .my-stats-empty {
     background-color: #e6e6e6;
