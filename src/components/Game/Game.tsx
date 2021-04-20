@@ -2,27 +2,45 @@ import React, { useState } from "react";
 
 interface IPlayer {
   playerName: string;
+  id: number;
 }
 
 const Game: React.FC = () => {
   const [playerCount, setPlayerCount] = useState<number>(0);
   const [players, setPlayers] = useState<IPlayer[]>([]);
 
-  // Select input determents how many players will be
+  // handleChange from select input determents
+  // how many players will be pushed to
+  // player array with unique id
   const handleChange = (event: React.FormEvent<HTMLSelectElement>) => {
-    const value = parseInt(event.currentTarget.value, 10);
+    const numberOfPlayers = parseInt(event.currentTarget.value, 10);
     // TODO: do i need this state
-    setPlayerCount(value);
+    setPlayerCount(numberOfPlayers);
 
-    // TODO: fix variable names
-    const x = { playerName: "" };
-    const array: IPlayer[] = [];
+    const playerArray: IPlayer[] = [];
 
-    for (let i = 0; i < value; i++) {
-      array.push(x);
+    for (let i = 0; i < numberOfPlayers; i++) {
+      const arrayOfId = playerArray.map((player) => player.id);
+
+      // Player to push to array
+      let player: IPlayer = {
+        playerName: "",
+        id: Math.floor(Math.random() * Math.floor(numberOfPlayers))
+      };
+
+      // Changing player id until is unique
+      do {
+        player = {
+          ...player,
+          id: Math.floor(Math.random() * Math.floor(numberOfPlayers))
+        };
+      } while (arrayOfId.includes(player.id));
+
+      // Pushing player with unique id to array
+      playerArray.push(player);
     }
 
-    setPlayers(array);
+    setPlayers(playerArray);
   };
 
   // Find and update player name in state
@@ -54,8 +72,7 @@ const Game: React.FC = () => {
           className="game-input"
           key={i}
           onChange={(event) => handleInputChange(event, i)}
-          // name={`playerName${[i]}`}
-          name="playerName"
+          name={`player-${[i]}`}
           value={players[i].playerName}
         />
       );
