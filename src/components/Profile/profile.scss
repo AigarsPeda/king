@@ -8,7 +8,8 @@
     .profile-menu-icon {
       width: 25px;
       height: 25px;
-      fill: $secondary-text-color;
+      // fill: $secondary-text-color;
+      fill: black;
 
       @include respond-above(md) {
         display: none;
@@ -24,6 +25,7 @@
       width: 50px;
       height: 50px;
       fill: $main-text-color;
+      fill: black;
     }
 
     .profile-profile-images-container {
