@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { RootStateType } from "../../redux/reducers/reducers";
 
 interface IPlayer {
   playerName: string;
@@ -8,6 +10,11 @@ interface IPlayer {
 const Game: React.FC = () => {
   const [playerCount, setPlayerCount] = useState<number>(0);
   const [players, setPlayers] = useState<IPlayer[]>([]);
+  const [checkbox, setChecked] = useState(false);
+
+  const { user } = useSelector((state: RootStateType) => ({
+    user: state.user.user
+  }));
 
   // handleChange from select input determents
   // how many players will be pushed to
@@ -81,6 +88,28 @@ const Game: React.FC = () => {
     return inputsArray;
   };
 
+  // Account owner is playing add his info to array
+  // off players
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { checked } = event.target;
+    console.log("un", checked);
+
+    setChecked(checked);
+
+    // TODO: Fix state update
+    // TODO: Remove player in unchecked
+    if (checked) {
+      let ply = players[0];
+
+      ply = {
+        ...ply,
+        playerName: user.name
+      };
+
+      players.splice(0, 1, ply);
+    }
+  };
+
   return (
     <div className="game">
       <label htmlFor="player count">Select player count:</label>
@@ -97,7 +126,21 @@ const Game: React.FC = () => {
         <option value="4">4</option>
         <option value="5">5</option>
       </select>
-      {createInputs()}
+      <div></div>
+      {createInputs().length ? (
+        <div>
+          <h3>Are you {user.name} playing?</h3>
+          {console.log("checkbox: ", checkbox)}
+          <input
+            type="checkbox"
+            defaultChecked={checkbox}
+            onChange={handleCheckboxChange}
+          />
+        </div>
+      ) : (
+        ""
+      )}
+      <div className="game__inputs">{createInputs()}</div>
     </div>
   );
 };
