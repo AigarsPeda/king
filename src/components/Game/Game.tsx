@@ -5,6 +5,9 @@ import { RootStateType } from "../../redux/reducers/reducers";
 interface IPlayer {
   playerName: string;
   id: number;
+  gameCreator: boolean;
+  winner: boolean;
+  score: string;
 }
 
 const Game: React.FC = () => {
@@ -29,10 +32,13 @@ const Game: React.FC = () => {
     for (let i = 0; i < numberOfPlayers; i++) {
       const arrayOfId = playerArray.map((player) => player.id);
 
-      // Player to push to array
+      // Player for pushing to array
       let player: IPlayer = {
         playerName: "",
-        id: Math.floor(Math.random() * Math.floor(numberOfPlayers))
+        id: Math.floor(Math.random() * Math.floor(numberOfPlayers)),
+        gameCreator: false,
+        winner: false,
+        score: "0"
       };
 
       // Changing player id until is unique
@@ -92,22 +98,30 @@ const Game: React.FC = () => {
   // off players
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { checked } = event.target;
-    console.log("un", checked);
 
     setChecked(checked);
 
-    // TODO: Fix state update
-    // TODO: Remove player in unchecked
+    let firstPlayer = players[0];
+
     if (checked) {
-      let ply = players[0];
-
-      ply = {
-        ...ply,
-        playerName: user.name
+      firstPlayer = {
+        ...firstPlayer,
+        playerName: user.name,
+        gameCreator: true
       };
-
-      players.splice(0, 1, ply);
+    } else {
+      firstPlayer = {
+        ...firstPlayer,
+        playerName: "",
+        gameCreator: false
+      };
     }
+
+    // Insert player in array
+    // 0 = index of player
+    // 1 = how many
+    // firstPlayer with what to replace
+    players.splice(0, 1, firstPlayer);
   };
 
   return (
