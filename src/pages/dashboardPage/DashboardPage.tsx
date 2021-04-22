@@ -1,5 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import DashboardControls from "../../components/DashboradControls/DashboradControls";
+import Game from "../../components/Game/Game";
 import Profile from "../../components/Profile/Profile";
 import { RootStateType } from "../../redux/reducers/reducers";
 
@@ -29,10 +31,11 @@ const DashboardPage: React.FC = () => {
         <Profile />
       </section>
       <section className="dashboard-main">
-        <h2>TODO: Add second password input!</h2>
-        <p>Make sure the passwords are the same</p>
-        <h2>TODO: Loading state for login and sing up!</h2>
-        <p>Add loading display on button</p>
+        <DashboardControls />
+        <Game />
+      </section>
+      <section className="dashboard-game-history">
+        <h1>Game History</h1>
         <h2>TODO: Adding game!</h2>
         <h2>TODO: Keeping score!</h2>
         <h2>TODO: What sport do you play!</h2>
