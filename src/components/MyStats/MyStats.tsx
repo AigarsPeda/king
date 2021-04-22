@@ -14,6 +14,7 @@ const MyStats: React.FC = () => {
   );
 
   useEffect(() => {
+    console.log("te");
     dispatch(getUserStates());
   }, [dispatch]);
 
