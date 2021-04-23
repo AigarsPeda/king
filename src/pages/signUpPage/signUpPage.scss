@@ -180,14 +180,19 @@
         width: 100%;
         border: none;
         border-radius: 6px;
-        background-color: $primary-accent-color;
+        background-color: $primary-btn-color;
         color: $light-text-color;
         height: 50px;
-        // margin-bottom: 15px;
         position: relative;
+        transition: all 0.3s ease;
+        cursor: pointer;
 
         @include respond-above(md) {
           height: 40px;
+
+          &:hover {
+            box-shadow: 0px 7px 15px 0px rgb(32 111 235 / 36%);
+          }
         }
 
         &.loading::after {
