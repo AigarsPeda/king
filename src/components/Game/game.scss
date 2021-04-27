@@ -1,8 +1,57 @@
-.game {
-  background-color: red;
-  margin-top: 20px;
+@use '../../scss/mixins' as *;
+@use '../../scss/variables' as *;
+@use '../../scss/query.scss' as *;
+@use '../../scss/typography.mixins.scss' as *;
 
-  .game__inputs {
-    background-color: rosybrown;
+.game {
+  // background-color: red;
+  // margin-top: 20px;
+
+  .game__form {
+    background-color: $card-bg;
+    padding: 50px 70px 50px 70px;
+
+    .game__form-checkbox {
+      display: flex;
+      align-items: center;
+    }
+
+    button {
+      width: 100%;
+      border: none;
+      border-radius: 6px;
+      background-color: $primary-btn-color;
+      color: $light-text-color;
+      height: 50px;
+      margin-bottom: 20px;
+      margin-top: 20px;
+      position: relative;
+      transition: all 0.3s ease;
+      cursor: pointer;
+
+      @include respond-above(md) {
+        height: 40px;
+
+        &:hover {
+          box-shadow: 0px 7px 15px 0px rgb(32 111 235 / 36%);
+        }
+      }
+
+      &.loading::after {
+        content: "";
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        border: 4px solid transparent;
+        border-top-color: #ffffff;
+        border-radius: 50%;
+        animation: button-loading-spinner 1s ease infinite;
+      }
+    }
   }
 }
