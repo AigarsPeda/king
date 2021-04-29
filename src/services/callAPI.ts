@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:8000/v1";
+const BASE_URL = "http://localhost:8000/api/v1";
 
 // fetch option object interface
 interface IOptions {
