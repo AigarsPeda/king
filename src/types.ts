@@ -32,13 +32,13 @@ export type IUserLogIn = {
   password: string;
 };
 
-export type IGame = {
-  game_created_on: string;
-  game_creator_id: number;
-  game_ended_on: null | string;
-  game_id: number;
-  player_array: IGamePlayer[];
-};
+// export type IGame = {
+//   game_created_on: string;
+//   game_creator_id: number;
+//   game_ended_on: null | string;
+//   game_id: number;
+//   player_array: IGamePlayer[];
+// };
 
 export type IGamePlayer = {
   id: string;
@@ -58,12 +58,42 @@ export type IUserStates = {
   user_id: number;
 };
 
-// export type IGame = {
-// player_array: [{…}, {…}, {…}, {…}, {…}];
-// tournament_created_on: string;
-// tournament_creator_id: number;
-// tournament_ended_on: null | string;
-// tournament_id: number;
-// }
+export type ICreateTournament = {
+  id: number;
+  playerArray: IPlayer[];
+};
+
+export type ITournamentCreator = {
+  id: number;
+};
+
+export type ITournamentLocations = {
+  latitude: number;
+  longitude: number;
+};
+
+export type ITournament = {
+  tournament_created_on: string;
+  tournament_creator_id: number;
+  tournament_ended_on: string | null;
+  tournament_id: number;
+  tournament_latitude: number | null;
+  tournament_longitude: number | null;
+  tournament_winner: number | null;
+};
+
+export type IPlayer = {
+  playerName: string;
+  inTournamentId: number;
+};
+
+export type IPlayerFromDB = {
+  in_tournament_id: number;
+  is_winner: boolean;
+  name: string;
+  player_id: number;
+  points: number;
+  tournament_id: number;
+};
 
 export type IProfileSelectedInfo = "dashboard" | "mystats" | "hottips";
