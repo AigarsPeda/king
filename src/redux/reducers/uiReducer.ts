@@ -7,7 +7,7 @@ export interface IAuthState {
 
 // Initial State
 const initialState: IAuthState = {
-  selectedInfo: "dashboard"
+  selectedInfo: "mystats"
 };
 
 export const UIReducer = (
