@@ -1,36 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { stringifyNumber } from "../../helpers/stringifyNumber";
 import { createTournaments } from "../../redux/actions/tournaments";
 import { RootStateType } from "../../redux/reducers/reducers";
 import { IPlayer, ICreateTournament } from "../../types";
 import Input from "../ui/input/Input";
-
-const special = [
-  "Zeroth",
-  "First",
-  "Second",
-  "Third",
-  "Fourth",
-  "Fifth",
-  "Sixth",
-  "Seventh",
-  "Eighth",
-  "Ninth",
-  "Tenth",
-  "Eleventh",
-  "Twelfth",
-  "Thirteenth",
-  "Fourteenth",
-  "Fifteenth",
-  "Sixteenth",
-  "Seventeenth",
-  "Eighteenth",
-  "Nineteenth"
-];
-
-const stringifyNumber = (n: number) => {
-  return special[n];
-};
 
 const AddPlayers: React.FC = () => {
   const dispatch = useDispatch();
@@ -144,7 +118,6 @@ const AddPlayers: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(players);
 
     const data: ICreateTournament = {
       id: user.user_id,
