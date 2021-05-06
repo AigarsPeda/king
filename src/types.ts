@@ -94,6 +94,7 @@ export type IPlayerFromDB = {
   player_id: number;
   points: number;
   tournament_id: number;
+  big_points: number;
 };
 
 export type IProfileSelectedInfo = "dashboard" | "mystats" | "hottips";
