@@ -1,0 +1,59 @@
+@use '../../scss/mixins' as *;
+@use '../../scss/variables' as *;
+@use '../../scss/query.scss' as *;
+@use '../../scss/typography.mixins.scss' as *;
+
+.game {
+  border-radius: 10px;
+  background-color: $card-bg;
+  margin: 20px 0;
+  padding: 20px 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 8px rgb(85 102 119 / 3%), 0 1px 1px rgb(85 102 119 / 40%);
+
+  &:hover {
+    box-shadow: 6px 7px 20px #e1e1e3;
+  }
+
+  @include respond-above(md) {
+    padding: 20px 70px 20px 70px;
+  }
+
+  table {
+    width: 100%;
+    border-spacing: 0;
+    text-transform: capitalize;
+    table-layout: fixed;
+    border-collapse: collapse;
+
+    thead {
+      font-size: 1.4em;
+      font-weight: bold;
+      text-align: left;
+
+      th {
+        border-bottom: solid 2px $primary-btn-color;
+        padding-bottom: 10px;
+      }
+    }
+
+    tbody {
+      font-size: 1.2rem;
+      text-align: left;
+
+      tr {
+        border: none;
+
+        // &:nth-child(2n) {
+        //   // background: rgba($primary-btn-color, 0.2);
+        //   background: lighten($primary-btn-color, 42%);
+        // }
+      }
+
+      td {
+        padding: 10px 5px;
+        border-bottom: solid 1px #dee2e6;
+      }
+    }
+  }
+}
