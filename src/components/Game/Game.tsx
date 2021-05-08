@@ -1,16 +1,149 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootStateType } from "../../redux/reducers/reducers";
+import { IPlayerFromDB } from "../../types";
 
 const Game: React.FC = () => {
   const { players } = useSelector((state: RootStateType) => ({
     players: state.tournaments.playerArray
   }));
+  const [gameNumber, setGameNumber] = useState(1);
+
+  const teamA: IPlayerFromDB[] = [];
+  const teamB: IPlayerFromDB[] = [];
+
+  const teamANext: IPlayerFromDB[] = [];
+  const teamBNext: IPlayerFromDB[] = [];
+
+  players.forEach((player) => {
+    switch (gameNumber) {
+      case 1:
+        if (player.in_tournament_id === 0 || player.in_tournament_id === 1) {
+          teamA.push(player);
+        } else if (
+          player.in_tournament_id === 2 ||
+          player.in_tournament_id === 3
+        ) {
+          teamB.push(player);
+        }
+
+        /* Creating Next Teams **/
+        if (player.in_tournament_id === 0 || player.in_tournament_id === 2) {
+          teamANext.push(player);
+        } else if (
+          player.in_tournament_id === 1 ||
+          player.in_tournament_id === 3
+        ) {
+          teamBNext.push(player);
+        }
+        break;
+      case 2:
+        if (player.in_tournament_id === 0 || player.in_tournament_id === 2) {
+          teamA.push(player);
+        } else if (
+          player.in_tournament_id === 1 ||
+          player.in_tournament_id === 3
+        ) {
+          teamB.push(player);
+        }
+        break;
+      case 3:
+        if (player.in_tournament_id === 0 || player.in_tournament_id === 3) {
+          teamA.push(player);
+        } else if (
+          player.in_tournament_id === 1 ||
+          player.in_tournament_id === 2
+        ) {
+          teamB.push(player);
+        }
+        break;
+      case 4:
+        if (player.in_tournament_id === 0 || player.in_tournament_id === 1) {
+          teamA.push(player);
+        } else if (
+          player.in_tournament_id === 2 ||
+          player.in_tournament_id === 3
+        ) {
+          teamB.push(player);
+        }
+        break;
+      case 5:
+        if (player.in_tournament_id === 0 || player.in_tournament_id === 2) {
+          teamA.push(player);
+        } else if (
+          player.in_tournament_id === 1 ||
+          player.in_tournament_id === 3
+        ) {
+          teamB.push(player);
+        }
+        break;
+      case 6:
+        if (player.in_tournament_id === 0 || player.in_tournament_id === 3) {
+          teamA.push(player);
+        } else if (
+          player.in_tournament_id === 1 ||
+          player.in_tournament_id === 2
+        ) {
+          teamB.push(player);
+        }
+        break;
+      case 7:
+        if (player.in_tournament_id === 0 || player.in_tournament_id === 1) {
+          teamA.push(player);
+        } else if (
+          player.in_tournament_id === 2 ||
+          player.in_tournament_id === 3
+        ) {
+          teamB.push(player);
+        }
+        break;
+      case 8:
+        if (player.in_tournament_id === 0 || player.in_tournament_id === 2) {
+          teamA.push(player);
+        } else if (
+          player.in_tournament_id === 1 ||
+          player.in_tournament_id === 3
+        ) {
+          teamB.push(player);
+        }
+        break;
+      case 9:
+        if (player.in_tournament_id === 0 || player.in_tournament_id === 3) {
+          teamA.push(player);
+        } else if (
+          player.in_tournament_id === 1 ||
+          player.in_tournament_id === 2
+        ) {
+          teamB.push(player);
+        }
+        break;
+      default:
+        break;
+    }
+  });
+
+  const displayTeam = (teamArray: IPlayerFromDB[]) => {
+    const team: JSX.Element[] = [];
+    for (let i = 0; i < teamArray.length; i++) {
+      team.push(
+        <div key={teamArray[i].in_tournament_id}>
+          <h1>{teamArray[i].name}</h1>
+        </div>
+      );
+    }
+    return team;
+  };
 
   return (
     <div className="game">
+      {console.log(players)}
       <div className="game__score">
         <h1>Display Score</h1>
+        {displayTeam(teamA)}
+        {displayTeam(teamB)}
+        <p>Next:</p>
+        {displayTeam(teamANext)}
+        {displayTeam(teamBNext)}
       </div>
       <div className="game__players">
         <table>
