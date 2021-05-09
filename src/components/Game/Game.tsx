@@ -216,6 +216,7 @@ const Game: React.FC = () => {
   return (
     <div className="game">
       {console.log(players)}
+      {console.log(gameNumber)}
       <div className="game__score">
         <h1>Display Score</h1>
         {displayTeam(teamA)}
@@ -223,6 +224,11 @@ const Game: React.FC = () => {
         <p>Next:</p>
         {displayTeam(nextTeamA)}
         {displayTeam(nextTeamB)}
+      </div>
+      <div>
+        <button onClick={() => setGameNumber((state) => state + 1)}>
+          Next
+        </button>
       </div>
       <div className="game__players">
         <table>
