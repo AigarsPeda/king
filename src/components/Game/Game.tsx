@@ -44,154 +44,109 @@ const Game: React.FC = () => {
 
         break;
       case 2:
-        if (player.in_tournament_id === 0 || player.in_tournament_id === 2) {
+        if (compareValues([0, 2], player.in_tournament_id)) {
           teamA.push(player);
-        } else if (
-          player.in_tournament_id === 1 ||
-          player.in_tournament_id === 3
-        ) {
+        } else if (compareValues([1, 3], player.in_tournament_id)) {
           teamB.push(player);
         }
 
         /* Creating Next Teams **/
-        if (player.in_tournament_id === 0 || player.in_tournament_id === 3) {
+        if (compareValues([0, 3], player.in_tournament_id)) {
           nextTeamA.push(player);
-        } else if (
-          player.in_tournament_id === 1 ||
-          player.in_tournament_id === 2
-        ) {
+        } else if (compareValues([1, 2], player.in_tournament_id)) {
           nextTeamB.push(player);
         }
 
         break;
       case 3:
-        if (player.in_tournament_id === 0 || player.in_tournament_id === 3) {
+        if (compareValues([0, 3], player.in_tournament_id)) {
           teamA.push(player);
-        } else if (
-          player.in_tournament_id === 1 ||
-          player.in_tournament_id === 2
-        ) {
+        } else if (compareValues([1, 2], player.in_tournament_id)) {
           teamB.push(player);
         }
 
         /* Creating Next Teams **/
-        if (player.in_tournament_id === 0 || player.in_tournament_id === 1) {
+        if (compareValues([0, 1], player.in_tournament_id)) {
           nextTeamA.push(player);
-        } else if (
-          player.in_tournament_id === 2 ||
-          player.in_tournament_id === 3
-        ) {
+        } else if (compareValues([2, 3], player.in_tournament_id)) {
           nextTeamB.push(player);
         }
 
         break;
       case 4:
-        if (player.in_tournament_id === 0 || player.in_tournament_id === 1) {
+        if (compareValues([0, 1], player.in_tournament_id)) {
           teamA.push(player);
-        } else if (
-          player.in_tournament_id === 2 ||
-          player.in_tournament_id === 3
-        ) {
+        } else if (compareValues([2, 3], player.in_tournament_id)) {
           teamB.push(player);
         }
 
         /* Creating Next Teams **/
-        if (player.in_tournament_id === 0 || player.in_tournament_id === 2) {
+        if (compareValues([0, 2], player.in_tournament_id)) {
           nextTeamA.push(player);
-        } else if (
-          player.in_tournament_id === 1 ||
-          player.in_tournament_id === 3
-        ) {
+        } else if (compareValues([1, 3], player.in_tournament_id)) {
           nextTeamB.push(player);
         }
         break;
       case 5:
-        if (player.in_tournament_id === 0 || player.in_tournament_id === 2) {
+        if (compareValues([0, 2], player.in_tournament_id)) {
           teamA.push(player);
-        } else if (
-          player.in_tournament_id === 1 ||
-          player.in_tournament_id === 3
-        ) {
+        } else if (compareValues([1, 3], player.in_tournament_id)) {
           teamB.push(player);
         }
 
         /* Creating Next Teams **/
-        if (player.in_tournament_id === 0 || player.in_tournament_id === 3) {
+        if (compareValues([0, 3], player.in_tournament_id)) {
           nextTeamA.push(player);
-        } else if (
-          player.in_tournament_id === 1 ||
-          player.in_tournament_id === 2
-        ) {
+        } else if (compareValues([1, 2], player.in_tournament_id)) {
           nextTeamB.push(player);
         }
         break;
       case 6:
-        if (player.in_tournament_id === 0 || player.in_tournament_id === 3) {
+        if (compareValues([0, 3], player.in_tournament_id)) {
           teamA.push(player);
-        } else if (
-          player.in_tournament_id === 1 ||
-          player.in_tournament_id === 2
-        ) {
+        } else if (compareValues([1, 2], player.in_tournament_id)) {
           teamB.push(player);
         }
 
         /* Creating Next Teams **/
-        if (player.in_tournament_id === 0 || player.in_tournament_id === 1) {
+        if (compareValues([0, 1], player.in_tournament_id)) {
           nextTeamA.push(player);
-        } else if (
-          player.in_tournament_id === 2 ||
-          player.in_tournament_id === 3
-        ) {
+        } else if (compareValues([2, 3], player.in_tournament_id)) {
           nextTeamB.push(player);
         }
         break;
       case 7:
-        if (player.in_tournament_id === 0 || player.in_tournament_id === 1) {
+        if (compareValues([0, 1], player.in_tournament_id)) {
           teamA.push(player);
-        } else if (
-          player.in_tournament_id === 2 ||
-          player.in_tournament_id === 3
-        ) {
+        } else if (compareValues([2, 3], player.in_tournament_id)) {
           teamB.push(player);
         }
 
         /* Creating Next Teams **/
-        if (player.in_tournament_id === 0 || player.in_tournament_id === 2) {
+        if (compareValues([0, 2], player.in_tournament_id)) {
           nextTeamA.push(player);
-        } else if (
-          player.in_tournament_id === 1 ||
-          player.in_tournament_id === 3
-        ) {
+        } else if (compareValues([1, 3], player.in_tournament_id)) {
           nextTeamB.push(player);
         }
         break;
       case 8:
-        if (player.in_tournament_id === 0 || player.in_tournament_id === 2) {
+        if (compareValues([0, 2], player.in_tournament_id)) {
           teamA.push(player);
-        } else if (
-          player.in_tournament_id === 1 ||
-          player.in_tournament_id === 3
-        ) {
+        } else if (compareValues([1, 3], player.in_tournament_id)) {
           teamB.push(player);
         }
 
         /* Creating Next Teams **/
-        if (player.in_tournament_id === 0 || player.in_tournament_id === 3) {
+        if (compareValues([0, 3], player.in_tournament_id)) {
           nextTeamA.push(player);
-        } else if (
-          player.in_tournament_id === 1 ||
-          player.in_tournament_id === 2
-        ) {
+        } else if (compareValues([1, 2], player.in_tournament_id)) {
           nextTeamB.push(player);
         }
         break;
       case 9:
-        if (player.in_tournament_id === 0 || player.in_tournament_id === 3) {
+        if (compareValues([0, 3], player.in_tournament_id)) {
           teamA.push(player);
-        } else if (
-          player.in_tournament_id === 1 ||
-          player.in_tournament_id === 2
-        ) {
+        } else if (compareValues([1, 2], player.in_tournament_id)) {
           teamB.push(player);
         }
         break;
