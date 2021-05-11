@@ -22,14 +22,27 @@
   .game__current {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+
+    .game__current__teams {
+      .game__current__teams-player {
+        text-transform: capitalize;
+      }
+    }
 
     .game__current-score {
       display: flex;
+      padding: 10px;
+      align-items: center;
 
-      // input {
-      //   background-color: $score-input-bg-color;
-      //   color: $score-input-color;
-      // }
+      p {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+
+      input {
+        width: 100px;
+      }
     }
   }
 
