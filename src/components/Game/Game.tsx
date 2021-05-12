@@ -2,12 +2,17 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootStateType } from "../../redux/reducers/reducers";
 import { IPlayerFromDB } from "../../types";
+import Input from "../ui/input/Input";
 
 const Game: React.FC = () => {
   const { players } = useSelector((state: RootStateType) => ({
     players: state.tournaments.playerArray
   }));
   const [gameNumber, setGameNumber] = useState(1);
+  const [teamScore, setTeamScore] = useState({
+    teamAScore: "",
+    teamBScore: ""
+  });
 
   /* Current Game **/
   const teamA: IPlayerFromDB[] = [];
@@ -16,6 +21,14 @@ const Game: React.FC = () => {
   /* Next Game **/
   const nextTeamA: IPlayerFromDB[] = [];
   const nextTeamB: IPlayerFromDB[] = [];
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setTeamScore((state) => ({
+      ...state,
+      [name]: value
+    }));
+  };
 
   const compareValues = (arrayOfNumbers: number[], number: number) => {
     for (let i = 0; i < arrayOfNumbers.length; i++) {
@@ -155,13 +168,20 @@ const Game: React.FC = () => {
     }
   });
 
+  // const generateKey = (pre: string) => {
+  //   return `${pre}_${new Date().getTime()}`;
+  // };
+
   const displayTeam = (teamArray: IPlayerFromDB[]) => {
     const team: JSX.Element[] = [];
     for (let i = 0; i < teamArray.length; i++) {
       team.push(
-        <div key={teamArray[i].in_tournament_id}>
-          <h1>{teamArray[i].name}</h1>
-        </div>
+        <h1
+          className="game__current__teams-player"
+          key={teamArray[i].in_tournament_id}
+        >
+          {teamArray[i].name}
+        </h1>
       );
     }
 
@@ -172,11 +192,29 @@ const Game: React.FC = () => {
     <div className="game">
       {console.log(players)}
       {console.log(gameNumber)}
-      <div className="game__score">
-        <h1>Display Score</h1>
-        {displayTeam(teamA)}
-        {displayTeam(teamB)}
-        <p>Next:</p>
+      <div>
+        <div className="game__current">
+          <div className="game__current__teams">{displayTeam(teamA)}</div>
+          <div className="game__current-score">
+            <Input
+              value={teamScore.teamAScore}
+              type={"text"}
+              name={"teamAScore"}
+              label={"Enter Score"}
+              handleChange={handleChange}
+            />
+            <p>:</p>
+            <Input
+              value={teamScore.teamBScore}
+              type={"text"}
+              name={"teamBScore"}
+              label={"Enter Score"}
+              handleChange={handleChange}
+            />
+          </div>
+          <div className="game__current__teams">{displayTeam(teamB)}</div>
+        </div>
+        <p>Next Game:</p>
         {displayTeam(nextTeamA)}
         {displayTeam(nextTeamB)}
       </div>
@@ -195,9 +233,9 @@ const Game: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {players.map((player) => {
+            {players.map((player, index) => {
               return (
-                <tr key={player.in_tournament_id}>
+                <tr key={index}>
                   <td>{player.name}</td>
                   <td>{player.points}</td>
                   <td>{player.big_points}</td>
