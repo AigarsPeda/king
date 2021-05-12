@@ -23,7 +23,7 @@ export const validateCreateUser = ({
   // TODO: no numbers
   if (name.trim().length === 0) {
     isValid = false;
-    errorMessage = "name isn't provided'";
+    errorMessage = "name isn't provided";
   }
 
   if (surname.trim().length === 0) {
