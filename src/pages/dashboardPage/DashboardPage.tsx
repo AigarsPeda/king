@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import DashboardControls from "../../components/DashboradControls/DashboradControls";
-import Game from "../../components/Game/Game";
 import Profile from "../../components/Profile/Profile";
+import Tournament from "../../components/Tournaments/Tournaments";
+import { getAllTournaments } from "../../redux/actions/tournaments";
 import { RootStateType } from "../../redux/reducers/reducers";
 
 const DashboardPage: React.FC = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  const { games } = useSelector((state: RootStateType) => ({
-    games: state.games.games
+  const { tournaments } = useSelector((state: RootStateType) => ({
+    tournaments: state.tournaments.tournaments
   }));
 
   /** Fetch all user stats only when
@@ -20,19 +21,19 @@ const DashboardPage: React.FC = () => {
    * log in or sign up
    * because they are needed at the start * */
 
-  // useEffect(() => {
-  //   dispatch(getAllGames());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(getAllTournaments());
+  }, [dispatch]);
 
   return (
     <div className="dashboard">
-      {console.log(games)}
+      {console.log("tournaments: ", tournaments)}
       <section className="dashboard-profile">
         <Profile />
       </section>
       <section className="dashboard-main">
         <DashboardControls />
-        <Game />
+        <Tournament />
       </section>
       <section className="dashboard-game-history">
         <h1>Game History</h1>
