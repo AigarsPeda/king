@@ -1,17 +1,23 @@
-// base
+/* Base **/
 @use "./scss/base";
 @use "./scss/fonts";
 @use "./scss/reset";
 @use "./scss/query";
 @use "./scss/typography";
 
-// components
+/* UI **/
+@use "./components/ui/input/input";
+@use "./components/ui/button/button";
+
+/* Components **/
 @use "./components/Game/game";
 @use "./components/Profile/profile";
 @use "./components/MyStats/myStats";
+@use "./components/AddPlayers/addPlayers";
+@use "./components/Tournaments/tournaments";
 @use "./components/DashboradControls/dashboradControls";
 
-// pages
+/* Pages **/
 @use "./pages/noMatch/noMatchPage";
 @use "./pages/loginPage/loginPage";
 @use "./pages/signUpPage/signUpPage";
