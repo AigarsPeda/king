@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { setGameNumber } from "../../redux/actions/tournaments";
 import { RootStateType } from "../../redux/reducers/reducers";
 import { IPlayerFromDB } from "../../types";
 import Input from "../ui/input/Input";
 
 const Game: React.FC = () => {
-  const { players } = useSelector((state: RootStateType) => ({
-    players: state.tournaments.playerArray
+  const { players, gameNumber } = useSelector((state: RootStateType) => ({
+    players: state.tournaments.playerArray,
+    gameNumber: state.tournaments.gameNumber
   }));
-  const [gameNumber, setGameNumber] = useState(1);
+  const [gameCount, setGameCount] = useState(gameNumber);
   const [teamScore, setTeamScore] = useState({
     teamAScore: "",
     teamBScore: ""
@@ -40,7 +42,7 @@ const Game: React.FC = () => {
   };
 
   players.forEach((player) => {
-    switch (gameNumber) {
+    switch (gameCount) {
       case 1:
         if (compareValues([0, 1], player.in_tournament_id)) {
           teamA.push(player);
@@ -188,10 +190,21 @@ const Game: React.FC = () => {
     return team;
   };
 
+  const finishGame = () => {
+    setGameNumber(gameCount);
+    setGameCount((state) => state + 1);
+
+    // TODO: remove magic number 9
+    if (gameCount >= 9) {
+      setGameCount(1);
+    }
+  };
+
   return (
     <div className="game">
       {console.log(players)}
       {console.log(gameNumber)}
+      {console.log(gameCount)}
       <div>
         <div className="game__current">
           <div className="game__current__teams">{displayTeam(teamA)}</div>
@@ -219,9 +232,7 @@ const Game: React.FC = () => {
         {displayTeam(nextTeamB)}
       </div>
       <div>
-        <button onClick={() => setGameNumber((state) => state + 1)}>
-          Next
-        </button>
+        <button onClick={finishGame}>Next</button>
       </div>
       <div className="game__players">
         <table>
