@@ -14,10 +14,12 @@
 
   .dashboard-profile {
     padding: 20px 15px;
+    height: auto;
 
     @include respond-above(md) {
       width: 25%;
       margin: auto 0;
+      height: 100vh;
     }
   }
 
@@ -25,7 +27,7 @@
     padding: 20px 15px;
 
     @include respond-above(md) {
-      width: 50%;
+      width: 45%;
     }
   }
 
@@ -33,7 +35,7 @@
     background-color: red;
 
     @include respond-above(md) {
-      width: 25%;
+      width: 30%;
     }
   }
 }
