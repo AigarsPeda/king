@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
+import Button from "../../components/ui/button/Button";
+import Input from "../../components/ui/input/Input";
 import { validateLoginUser } from "../../helpers/validateLoginUser";
 import CrownIcon from "../../icons/CrownIcon";
 import sportNumbers from "../../images/sport-numbers.webp";
@@ -44,6 +46,7 @@ const LoginPage: React.FC = () => {
       return;
     }
 
+    setError(undefined);
     dispatch(
       logInUser({
         email: user.email,
@@ -68,44 +71,24 @@ const LoginPage: React.FC = () => {
           <p>If you are new /</p> <Link to="/signup">Create Account</Link>
         </div>
         <form onSubmit={handleSubmit}>
-          <div className="login-page-form-field">
-            <input
-              className="login-page-form-input"
-              placeholder=" "
-              type="email"
-              value={user.email}
-              onChange={handleChange}
-              name="email"
-              autoComplete="off"
-            />
-            <label htmlFor="email" className="login-page-form-label">
-              Email
-            </label>
-          </div>
-          <div className="login-page-form-field">
-            <input
-              className="login-page-form-input"
-              placeholder=" "
-              type="password"
-              value={user.password}
-              onChange={handleChange}
-              name="password"
-              autoComplete="off"
-            />
-            <label htmlFor="password" className="login-page-form-label">
-              Password
-            </label>
-          </div>
-
+          <Input
+            type={"email"}
+            value={user.email}
+            handleChange={handleChange}
+            name={"email"}
+            label={"Email"}
+          />
+          <Input
+            type={"password"}
+            value={user.password}
+            handleChange={handleChange}
+            name={"password"}
+            label={"Password"}
+          />
           {error && <div className="login-page-error">* {error}</div>}
           {authError && <div className="login-page-error">* {authError}</div>}
-          <button
-            type="submit"
-            disabled={isUserDataLoading}
-            className={`${isUserDataLoading && "loading"}`}
-          >
-            {!isUserDataLoading && "Login"}
-          </button>
+
+          <Button type="submit" isLoading={isUserDataLoading} title="Login" />
         </form>
         <div className="login-options">
           <p>Forgot Password /</p> <Link to="/reset">Reset</Link>
