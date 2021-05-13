@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
+import Button from "../../components/ui/button/Button";
+import Input from "../../components/ui/input/Input";
 import { validateCreateUser } from "../../helpers/validateCreateUser";
 import CrownIcon from "../../icons/CrownIcon";
 import volley from "../../images/volley.webp";
@@ -62,6 +64,7 @@ const SignUpPage: React.FC = () => {
       return;
     }
 
+    setError(undefined);
     dispatch(signUpUser(signUpUserData));
   };
 
@@ -84,79 +87,41 @@ const SignUpPage: React.FC = () => {
           <p>Already have an account /</p> <Link to="/login">Log In Now</Link>
         </div>
         <form onSubmit={handleSubmit}>
-          <div className="signup-page-form-field">
-            <input
-              className="signup-page-form-input"
-              placeholder=" "
-              type="text"
-              value={user.name}
-              onChange={handleChange}
-              name="surname"
-              autoComplete="off"
-            />
-            <label htmlFor="name" className="signup-page-form-label">
-              Name
-            </label>
-          </div>
-          <div className="signup-page-form-field">
-            <input
-              className="signup-page-form-input"
-              placeholder=" "
-              type="text"
-              value={user.surname}
-              onChange={handleChange}
-              name="surname"
-              autoComplete="off"
-            />
-            <label htmlFor="surname" className="signup-page-form-label">
-              Surname
-            </label>
-          </div>
-          <div className="signup-page-form-field">
-            <input
-              className="signup-page-form-input"
-              placeholder=" "
-              type="email"
-              value={user.email}
-              onChange={handleChange}
-              name="surname"
-              autoComplete="off"
-            />
-            <label htmlFor="email" className="signup-page-form-label">
-              Email
-            </label>
-          </div>
-          <div className="signup-page-form-field">
-            <input
-              className="signup-page-form-input"
-              placeholder=" "
-              type="password"
-              value={user.password}
-              onChange={handleChange}
-              name="password"
-              autoComplete="off"
-            />
-            <label htmlFor="password" className="signup-page-form-label">
-              Password
-            </label>
-          </div>
-          <div className="signup-page-form-field">
-            <input
-              className="signup-page-form-input"
-              placeholder=" "
-              type="password"
-              value={user.confirmPassword}
-              onChange={handleChange}
-              name="confirmPassword"
-              autoComplete="off"
-            />
-            <label
-              htmlFor="confirm password"
-              className="signup-page-form-label"
-            >
-              Confirm password
-            </label>
-          </div>
+          <Input
+            type={"text"}
+            value={user.name}
+            handleChange={handleChange}
+            name={"name"}
+            label={"Name"}
+          />
+          <Input
+            type={"text"}
+            value={user.surname}
+            handleChange={handleChange}
+            name={"surname"}
+            label={"Surname"}
+          />
+          <Input
+            type={"email"}
+            value={user.email}
+            handleChange={handleChange}
+            name={"email"}
+            label={"Email"}
+          />
+          <Input
+            type={"password"}
+            value={user.password}
+            handleChange={handleChange}
+            name={"password"}
+            label={"Password"}
+          />
+          <Input
+            type={"password"}
+            value={user.confirmPassword}
+            handleChange={handleChange}
+            name={"confirmPassword"}
+            label={"Confirm password"}
+          />
           <div className="terms">
             <input
               type="checkbox"
@@ -170,13 +135,7 @@ const SignUpPage: React.FC = () => {
           </div>
           {error && <div className="signup-page-error">* {error}</div>}
           {authError && <div className="signup-page-error">* {authError}</div>}
-          <button
-            type="submit"
-            disabled={isUserDataLoading}
-            className={`${isUserDataLoading && "loading"}`}
-          >
-            {!isUserDataLoading && "Login"}
-          </button>
+          <Button type="submit" isLoading={isUserDataLoading} title="Sign Up" />
         </form>
       </div>
     </div>
