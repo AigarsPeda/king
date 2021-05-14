@@ -4,6 +4,7 @@ import { ICreateTournament, IPlayerFromDB, ITournament } from "../../types";
 import { RootStateType } from "../reducers/reducers";
 import {
   SET_CURRENT_TOURNAMENT,
+  SET_TOURNAMENTS_GAME_NUMBER,
   SET_TOURNAMENTS_LOADING_SATE,
   SET_TOURNAMENT_PLAYERS,
   SET_USERS_TOURNAMENTS,
@@ -61,5 +62,14 @@ export const getAllTournaments = (): AppThunk => async (dispatch) => {
   dispatch({
     type: SET_USERS_TOURNAMENTS,
     payload: response
+  });
+};
+
+export const setGameNumber = (gameNumber: number): AppThunk => async (
+  dispatch
+) => {
+  dispatch({
+    type: SET_TOURNAMENTS_GAME_NUMBER,
+    payload: gameNumber
   });
 };
