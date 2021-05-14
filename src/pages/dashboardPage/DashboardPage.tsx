@@ -39,11 +39,6 @@ const DashboardPage: React.FC = () => {
         <h1>Game History</h1>
         <h2>TODO: Adding game!</h2>
         <h2>TODO: Keeping score!</h2>
-        <h2>TODO: What sport do you play!</h2>
-        <p>
-          There shoed be possibility to chose more then one sport. End score to
-          determine how winner is selected should change.
-        </p>
         <h2>TODO: Edit user data!</h2>
       </section>
     </div>
