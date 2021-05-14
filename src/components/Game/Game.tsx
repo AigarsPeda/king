@@ -5,11 +5,10 @@ import { IPlayerFromDB } from "../../types";
 import Input from "../ui/input/Input";
 
 const Game: React.FC = () => {
-  const { players, gameNumber } = useSelector((state: RootStateType) => ({
-    players: state.tournaments.playerArray,
-    gameNumber: state.tournaments.currentTournament?.tournament_current_game
+  const { players } = useSelector((state: RootStateType) => ({
+    players: state.tournaments.playerArray
   }));
-  const [gameCount, setGameCount] = useState(gameNumber ? gameNumber : 1);
+  const [gameCount, setGameCount] = useState(1);
   const [teamScore, setTeamScore] = useState({
     teamAScore: "",
     teamBScore: ""
@@ -227,7 +226,6 @@ const Game: React.FC = () => {
   return (
     <div className="game">
       {console.log(players)}
-      {console.log(gameNumber)}
       {console.log(gameCount)}
       <div>
         <div className="game__current">
