@@ -13,7 +13,7 @@ export interface ITournamentsState {
   currentTournament: ITournament | undefined;
   loadingTournament: boolean;
   playerArray: IPlayerFromDB[];
-  // gameNumber: number;
+  gameNumber: number;
 }
 
 // Initial State
@@ -21,8 +21,8 @@ const initialState: ITournamentsState = {
   tournaments: [],
   currentTournament: undefined,
   loadingTournament: false,
-  playerArray: []
-  // gameNumber: 1
+  playerArray: [],
+  gameNumber: 1
 };
 
 export const tournamentsReducer = (
@@ -57,11 +57,11 @@ export const tournamentsReducer = (
         loadingTournament: action.payload
       };
 
-    // case SET_TOURNAMENTS_GAME_NUMBER:
-    //   return {
-    //     ...state,
-    //     gameNumber: action.payload
-    //   };
+    case SET_TOURNAMENTS_GAME_NUMBER:
+      return {
+        ...state,
+        gameNumber: action.payload
+      };
 
     default:
       return state;
