@@ -80,6 +80,7 @@ export type ITournament = {
   tournament_latitude: number | null;
   tournament_longitude: number | null;
   tournament_winner: number | null;
+  tournament_current_game: number;
 };
 
 export type IPlayer = {
