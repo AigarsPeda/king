@@ -37,6 +37,8 @@ export const createTournaments = (data: ICreateTournament): AppThunk => async (
     data: data
   });
 
+  console.log(response);
+
   dispatch({
     type: SET_CURRENT_TOURNAMENT,
     payload: response.tournament
@@ -65,11 +67,11 @@ export const getAllTournaments = (): AppThunk => async (dispatch) => {
   });
 };
 
-export const setGameNumber = (gameNumber: number): AppThunk => async (
-  dispatch
-) => {
-  dispatch({
-    type: SET_TOURNAMENTS_GAME_NUMBER,
-    payload: gameNumber
-  });
-};
+// export const setGameNumber = (gameNumber: number): AppThunk => async (
+//   dispatch
+// ) => {
+//   dispatch({
+//     type: SET_TOURNAMENTS_GAME_NUMBER,
+//     payload: gameNumber
+//   });
+// };
