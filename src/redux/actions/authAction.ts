@@ -5,18 +5,22 @@ import { IDecoder, IUserLogIn, IUserSignUp } from "../../types";
 import { RootStateType } from "../reducers/reducers";
 import { AuthenticateActionTypes, AUTHENTICATE_USER } from "../types/authTypes";
 import {
+  ErrorActionTypes,
+  SET_AUTHENTICATION_ERROR
+} from "../types/errorTypes";
+import {
   SET_USER_DATA,
-  SET_USER_DATA_LOADING,
-  SET_USER_DATA_NOT_LOADING,
+  SET_USER_DATA_LOADING_SATE,
   UserActionTypes
 } from "../types/userTypes";
-import { getAllGames } from "./gamesActions";
+import { getAllTournaments } from "./tournaments";
+import { getUserStates } from "./userActions";
 
 type AppThunk<ReturnType = void> = ThunkAction<
   ReturnType,
   RootStateType,
   unknown,
-  AuthenticateActionTypes | UserActionTypes
+  AuthenticateActionTypes | UserActionTypes | ErrorActionTypes
 >;
 
 // const isTokenExpired = (exp: number) => Date.now() >= exp * 1000;
@@ -25,7 +29,8 @@ export const signUpUser = (signUpData: IUserSignUp): AppThunk => async (
   dispatch
 ) => {
   dispatch({
-    type: SET_USER_DATA_LOADING
+    type: SET_USER_DATA_LOADING_SATE,
+    payload: true
   });
 
   try {
@@ -35,17 +40,30 @@ export const signUpUser = (signUpData: IUserSignUp): AppThunk => async (
       data: signUpData
     });
 
-    console.log("response: ", response);
+    console.log(response);
 
     const { token, error }: { token: string; error?: string } = response;
-    const decoded = jwt_decode(token) as IDecoder;
 
-    // TODO: do something with error
     if (error) {
-      return console.log("Signup error: ", error);
+      dispatch({
+        type: SET_AUTHENTICATION_ERROR,
+        payload: error
+      });
+
+      dispatch({
+        type: SET_USER_DATA_LOADING_SATE,
+        payload: false
+      });
     }
 
-    if (token) {
+    const decoded = jwt_decode(token) as IDecoder;
+
+    if (token && decoded) {
+      dispatch({
+        type: SET_AUTHENTICATION_ERROR,
+        payload: undefined
+      });
+
       dispatch({
         type: AUTHENTICATE_USER,
         payload: true
@@ -59,12 +77,17 @@ export const signUpUser = (signUpData: IUserSignUp): AppThunk => async (
       // eslint-disable-next-line functional/immutable-data
       document.cookie = `access_token=Bearer ${token}`;
 
-      // getting all users games to display them in dashboard
-      // after sign up
-      dispatch(getAllGames());
+      // Getting all users games and state to display them in dashboard
+      // TODO: add loading state to getAllGames
+      // dispatch(getAllTournaments());
+      // dispatch(getUserStates());
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
+    dispatch({
+      type: SET_USER_DATA_LOADING_SATE,
+      payload: false
+    });
   }
 };
 
@@ -73,7 +96,8 @@ export const logInUser = (loginData: IUserLogIn): AppThunk => async (
 ) => {
   try {
     dispatch({
-      type: SET_USER_DATA_LOADING
+      type: SET_USER_DATA_LOADING_SATE,
+      payload: true
     });
 
     const response = await callAPI({
@@ -83,14 +107,27 @@ export const logInUser = (loginData: IUserLogIn): AppThunk => async (
     });
 
     const { token, error }: { token: string; error?: string } = response;
-    const decoded = jwt_decode(token) as IDecoder;
 
-    // TODO: do something with error
     if (error) {
-      return console.log("Login error: ", error);
+      dispatch({
+        type: SET_AUTHENTICATION_ERROR,
+        payload: error
+      });
+
+      dispatch({
+        type: SET_USER_DATA_LOADING_SATE,
+        payload: false
+      });
     }
 
-    if (token) {
+    const decoded = jwt_decode(token) as IDecoder;
+
+    if (token && decoded) {
+      dispatch({
+        type: SET_AUTHENTICATION_ERROR,
+        payload: undefined
+      });
+
       dispatch({
         type: AUTHENTICATE_USER,
         payload: true
@@ -104,15 +141,15 @@ export const logInUser = (loginData: IUserLogIn): AppThunk => async (
       // eslint-disable-next-line functional/immutable-data
       document.cookie = `access_token=Bearer ${token}`;
 
-      // getting all users games to display them in dashboard
-      // after log up
-      dispatch(getAllGames());
+      // Getting all users games and state to display them in dashboard
+      // TODO: add loading state to getAllGames
+      // dispatch(getAllTournaments());
+      // dispatch(getUserStates());
     }
   } catch (error) {
-    console.log(error);
-
     dispatch({
-      type: SET_USER_DATA_NOT_LOADING
+      type: SET_USER_DATA_LOADING_SATE,
+      payload: false
     });
   }
 };
@@ -134,7 +171,7 @@ export const logInUser = (loginData: IUserLogIn): AppThunk => async (
 //     dispatch({
 //       type: CLEAR_USER_DATA
 //     });
-//     dispatch({
+//     dispatch({v
 //       type: CLEAR_LOANS_DATA
 //     });
 //   } catch (error) {
