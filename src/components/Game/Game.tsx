@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { setGameNumber } from "../../redux/actions/tournaments";
 import { RootStateType } from "../../redux/reducers/reducers";
 import { IPlayerFromDB } from "../../types";
 import Input from "../ui/input/Input";
@@ -8,9 +7,9 @@ import Input from "../ui/input/Input";
 const Game: React.FC = () => {
   const { players, gameNumber } = useSelector((state: RootStateType) => ({
     players: state.tournaments.playerArray,
-    gameNumber: state.tournaments.gameNumber
+    gameNumber: state.tournaments.currentTournament?.tournament_current_game
   }));
-  const [gameCount, setGameCount] = useState(gameNumber);
+  const [gameCount, setGameCount] = useState(gameNumber ? gameNumber : 1);
   const [teamScore, setTeamScore] = useState({
     teamAScore: "",
     teamBScore: ""
@@ -190,8 +189,33 @@ const Game: React.FC = () => {
     return team;
   };
 
+  // http://localhost:8000/api/v1/game
+
+  //   {
+  //     tournamentId: 1,
+  //     gameNumber: 2,
+  //     teams: [
+  //         {
+  //             firstPlayer: "Elīna",
+  //             secondPlayer: "Aigars",
+  //             team: 2,
+  //             score: 18,
+  //             winner: false,
+  //             bigPoints: 1
+  //         },
+  //         {
+  //             firstPlayer: "Anna",
+  //             secondPlayer: "Līva",
+  //             team: 1,
+  //             score: 21,
+  //             winner: true,
+  //             bigPoints: 0
+  //         }
+  //     ]
+  // }
+
   const finishGame = () => {
-    setGameNumber(gameCount);
+    // setGameNumber(gameCount);
     setGameCount((state) => state + 1);
 
     // TODO: remove magic number 9
