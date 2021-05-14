@@ -24,8 +24,15 @@ interface ISetTournamentsLoading {
   payload: boolean;
 }
 
+export const SET_TOURNAMENTS_GAME_NUMBER = "SET_TOURNAMENTS_GAME_NUMBER";
+interface ISetTournamentsGameNumber {
+  type: typeof SET_TOURNAMENTS_GAME_NUMBER;
+  payload: number;
+}
+
 export type TournamentsActionTypes =
   | ISetUserTournamentsAction
   | ISetCurrentTournamentAction
   | ISetTournamentsLoading
-  | ISetTournamentPlayersAction;
+  | ISetTournamentPlayersAction
+  | ISetTournamentsGameNumber;
