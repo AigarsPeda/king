@@ -239,8 +239,33 @@ const Game: React.FC = () => {
   // }
 
   const finishGame = () => {
-    // setGameNumber(gameCount);
     setGameCount((state) => state + 1);
+
+    if (parseInt(teamScore.teamAScore) > parseInt(teamScore.teamBScore)) {
+      console.log("Team A won!");
+      const [playerOne, playerTwo] = teamA;
+
+      const newPlayerArray = players.map((player) => {
+        if (
+          player.in_tournament_id === playerOne.in_tournament_id ||
+          player.in_tournament_id === playerTwo.in_tournament_id
+        ) {
+          return {
+            ...player,
+            big_points: player.big_points + 1,
+            is_winner: true,
+            points: player.points + parseInt(teamScore.teamAScore)
+          };
+        }
+        return player;
+      });
+
+      console.log("kas vinēja: ", newPlayerArray);
+    }
+
+    if (parseInt(teamScore.teamAScore) < parseInt(teamScore.teamBScore)) {
+      console.log("Team B won!");
+    }
 
     // TODO: remove magic number 9
     if (gameCount >= 9) {
@@ -250,10 +275,6 @@ const Game: React.FC = () => {
 
   return (
     <div className="game">
-      {console.log(teamA)}
-      {console.log(teamB)}
-      {console.log(gameCount)}
-      {console.log(players)}
       <div>
         <div className="game__current">
           <div className="game__current__teams">{displayTeam(teamA)}</div>
