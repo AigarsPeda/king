@@ -38,10 +38,13 @@
       p {
         font-size: 1.5rem;
         font-weight: bold;
+        margin: 0 10px 0 10px;
       }
 
-      input {
-        width: 100px;
+      // Override class thats in input component
+      .input {
+        width: 85px;
+        margin: 1.2rem auto 1rem;
       }
     }
   }
