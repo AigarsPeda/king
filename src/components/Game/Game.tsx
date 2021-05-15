@@ -188,29 +188,54 @@ const Game: React.FC = () => {
     return team;
   };
 
+  // TODO: this is how post method should look
   // http://localhost:8000/api/v1/game
 
   //   {
   //     tournamentId: 1,
   //     gameNumber: 2,
   //     teams: [
-  //         {
-  //             firstPlayer: "Elīna",
-  //             secondPlayer: "Aigars",
-  //             team: 2,
-  //             score: 18,
-  //             winner: false,
-  //             bigPoints: 1
-  //         },
-  //         {
-  //             firstPlayer: "Anna",
-  //             secondPlayer: "Līva",
-  //             team: 1,
-  //             score: 21,
-  //             winner: true,
-  //             bigPoints: 0
-  //         }
-  //     ]
+  //     {
+  //         big_points: 1,
+  //         in_tournament_id: 2,
+  //         is_winner: true,
+  //         name: "elīna",
+  //         player_id: 2,
+  //         points: 21,
+  //         tournament_id: 4,
+  //         team_number: 0
+  //     },
+  //     {
+  //         big_points: 1,
+  //         in_tournament_id: 0,
+  //         is_winner: true,
+  //         name: "līva",
+  //         player_id: 4,
+  //         points: 21,
+  //         tournament_id: 4,
+  //         team_number: 0
+  //     },
+  //     {
+  //         big_points: 0,
+  //         in_tournament_id: 1,
+  //         is_winner: false,
+  //         name: "aigars",
+  //         player_id: 1,
+  //         points: 18,
+  //         tournament_id: 4,
+  //         team_number: 1
+  //     },
+  //     {
+  //         big_points: 0,
+  //         in_tournament_id: 1,
+  //         is_winner: false,
+  //         name: "anna",
+  //         player_id: 3,
+  //         points: 18,
+  //         tournament_id: 4,
+  //         team_number: 1
+  //     }
+  //  ]
   // }
 
   const finishGame = () => {
@@ -225,8 +250,10 @@ const Game: React.FC = () => {
 
   return (
     <div className="game">
-      {console.log(players)}
+      {console.log(teamA)}
+      {console.log(teamB)}
       {console.log(gameCount)}
+      {console.log(players)}
       <div>
         <div className="game__current">
           <div className="game__current__teams">{displayTeam(teamA)}</div>
