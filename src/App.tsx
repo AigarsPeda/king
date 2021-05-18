@@ -1,12 +1,11 @@
 import React from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
+import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
+import "./index.scss";
 import store from "./redux/store";
 import AppRoutes from "./routes/AppRoutes";
-
-import "./index.scss";
-import { persistStore } from "redux-persist";
 
 const App: React.FC = () => {
   // const location = useLocation();
