@@ -241,59 +241,74 @@ const Game: React.FC = () => {
   const finishGame = () => {
     setGameCount((state) => state + 1);
 
+    let newPlayerArray: IPlayerFromDB[] = [];
+    const [playerOneATeam, playerTwoATeam] = teamA;
+    const [playerOneBTeam, playerTwoBTeam] = teamB;
+
     // TODO: simplify this
     if (parseInt(teamScore.teamAScore) > parseInt(teamScore.teamBScore)) {
       console.log("Team A won!");
-      const [playerOne, playerTwo] = teamA;
 
-      const newPlayerArray = players.map((player) => {
+      newPlayerArray = players.map((player) => {
         if (
-          player.in_tournament_id === playerOne.in_tournament_id ||
-          player.in_tournament_id === playerTwo.in_tournament_id
+          player.in_tournament_id === playerOneATeam.in_tournament_id ||
+          player.in_tournament_id === playerTwoATeam.in_tournament_id
         ) {
+          /* This team won **/
           return {
             ...player,
             big_points: player.big_points + 1,
             is_winner: true,
             points: player.points + parseInt(teamScore.teamAScore)
           };
-        } else {
+        } else if (
+          player.in_tournament_id === playerOneBTeam.in_tournament_id ||
+          player.in_tournament_id === playerTwoBTeam.in_tournament_id
+        ) {
+          /* This team lost **/
           return {
             ...player,
             points: player.points + parseInt(teamScore.teamBScore)
           };
+        } else {
+          /* This player wasn't playing **/
+          return player;
         }
       });
-
-      console.log("kas vinēja: ", newPlayerArray);
     }
 
     if (parseInt(teamScore.teamAScore) < parseInt(teamScore.teamBScore)) {
       console.log("Team B won!");
 
-      const [playerOne, playerTwo] = teamB;
-
-      const newPlayerArray = players.map((player) => {
+      newPlayerArray = players.map((player) => {
         if (
-          player.in_tournament_id === playerOne.in_tournament_id ||
-          player.in_tournament_id === playerTwo.in_tournament_id
+          player.in_tournament_id === playerOneBTeam.in_tournament_id ||
+          player.in_tournament_id === playerTwoBTeam.in_tournament_id
         ) {
+          /* This team won **/
           return {
             ...player,
             big_points: player.big_points + 1,
             is_winner: true,
             points: player.points + parseInt(teamScore.teamBScore)
           };
-        } else {
+        } else if (
+          player.in_tournament_id === playerOneATeam.in_tournament_id ||
+          player.in_tournament_id === playerTwoATeam.in_tournament_id
+        ) {
+          /* This team lost **/
           return {
             ...player,
             points: player.points + parseInt(teamScore.teamAScore)
           };
+        } else {
+          /* This player wasn't playing **/
+          return player;
         }
       });
-
-      console.log("kas vinēja: ", newPlayerArray);
     }
+
+    console.log(newPlayerArray);
 
     // TODO: remove magic number 9
     if (gameCount >= 9) {
