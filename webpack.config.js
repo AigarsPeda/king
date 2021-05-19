@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable functional/immutable-data */
 const HtmlPlugin = require("html-webpack-plugin");
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -17,6 +19,15 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.js$/,
+        enforce: "pre",
+        use: [
+          {
+            loader: "source-map-loader"
+          }
+        ]
+      },
       {
         test: /\.(js|jsx|ts|tsx)$/,
         exclude: /node_modules/,
@@ -49,7 +60,7 @@ module.exports = {
           {
             loader: "css-loader",
             options: {
-              url: false
+              url: true
             }
           },
           {
@@ -67,9 +78,13 @@ module.exports = {
     // This is necessary for react-route-dom to work
     contentBase: path.join(__dirname, "build"),
     historyApiFallback: true,
-    port: 5000
+    port: 5000,
+    overlay: {
+      warnings: true,
+      errors: true
+    }
   },
-  devtool: process.env.NODE_ENV === "development" ? "inline-source-map" : false,
+  devtool: process.env.NODE_ENV === "development" ? "eval-source-map" : false,
   plugins: [
     new HtmlPlugin({
       filename: "index.html",
