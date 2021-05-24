@@ -1,14 +1,20 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setGameNumber } from "../../redux/actions/tournaments";
 import { RootStateType } from "../../redux/reducers/reducers";
 import { IPlayerFromDB } from "../../types";
 import Input from "../ui/input/Input";
 
 const Game: React.FC = () => {
-  const { players } = useSelector((state: RootStateType) => ({
-    players: state.tournaments.playerArray
-  }));
-  const [gameCount, setGameCount] = useState(1);
+  const dispatch = useDispatch();
+  const { players, tournamentId, gameNumber } = useSelector(
+    (state: RootStateType) => ({
+      players: state.tournaments.playerArray,
+      tournamentId: state.tournaments.currentTournament?.tournament_id,
+      gameNumber: state.tournaments.gameNumber
+    })
+  );
+  // const [gameCount, setGameCount] = useState(1);
   const [teamScore, setTeamScore] = useState({
     teamAScore: "",
     teamBScore: ""
@@ -40,7 +46,7 @@ const Game: React.FC = () => {
   };
 
   players.forEach((player) => {
-    switch (gameCount) {
+    switch (gameNumber) {
       case 1:
         if (compareValues([0, 1], player.in_tournament_id)) {
           teamA.push(player);
@@ -239,7 +245,7 @@ const Game: React.FC = () => {
   // }
 
   const finishGame = () => {
-    setGameCount((state) => state + 1);
+    // setGameCount((state) => state + 1);
 
     let newPlayerArray: IPlayerFromDB[] = [];
     const [playerOneATeam, playerTwoATeam] = teamA;
@@ -308,11 +314,15 @@ const Game: React.FC = () => {
       });
     }
 
-    console.log(newPlayerArray);
+    console.log("tournamentId: ", tournamentId);
+    console.log("setGameNumber: ", gameNumber);
+    console.log("newPlayerArray: ", newPlayerArray);
+
+    dispatch(setGameNumber(gameNumber + 1));
 
     // TODO: remove magic number 9
-    if (gameCount >= 9) {
-      setGameCount(1);
+    if (gameNumber >= 9) {
+      dispatch(setGameNumber(1));
     }
   };
 
@@ -320,6 +330,7 @@ const Game: React.FC = () => {
     <div className="game">
       <div>
         <div className="game__current">
+          {console.log("gameNumber: ", gameNumber)}
           <div className="game__current__teams">{displayTeam(teamA)}</div>
           <div className="game__current-score">
             <Input
