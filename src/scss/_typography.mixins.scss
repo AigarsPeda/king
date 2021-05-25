@@ -1,0 +1,17 @@
+@use "./variables"  as *;
+
+@mixin h1-bold-mobile {
+  font-size: $h1-font-size-mobile;
+  font-weight: bold;
+}
+
+@mixin  p-secondary-semi-bold-mobile {
+  font-size: $p-font-size-mobile;
+  font-weight: 500;
+}
+
+@mixin  a-secondary-semi-bold-mobile {
+  font-size: $a-font-size-mobile;
+  font-weight: 500;
+}
+
