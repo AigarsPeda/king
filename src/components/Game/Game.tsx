@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setGameNumber } from "../../redux/actions/tournaments";
+import { saveGame, setGameNumber } from "../../redux/actions/tournaments";
 import { RootStateType } from "../../redux/reducers/reducers";
 import { IPlayerFromDB } from "../../types";
 import Input from "../ui/input/Input";
@@ -174,10 +174,6 @@ const Game: React.FC = () => {
     }
   });
 
-  // const generateKey = (pre: string) => {
-  //   return `${pre}_${new Date().getTime()}`;
-  // };
-
   const displayTeam = (teamArray: IPlayerFromDB[]) => {
     const team: JSX.Element[] = [];
     for (let i = 0; i < teamArray.length; i++) {
@@ -194,62 +190,15 @@ const Game: React.FC = () => {
     return team;
   };
 
-  // TODO: this is how post method should look
-  // http://localhost:8000/api/v1/game
-
-  //   {
-  //     tournamentId: 1,
-  //     gameNumber: 2,
-  //     teams: [
-  //     {
-  //         big_points: 1,
-  //         in_tournament_id: 2,
-  //         is_winner: true,
-  //         name: "elīna",
-  //         player_id: 2,
-  //         points: 21,
-  //         tournament_id: 4,
-  //         team_number: 0
-  //     },
-  //     {
-  //         big_points: 1,
-  //         in_tournament_id: 0,
-  //         is_winner: true,
-  //         name: "līva",
-  //         player_id: 4,
-  //         points: 21,
-  //         tournament_id: 4,
-  //         team_number: 0
-  //     },
-  //     {
-  //         big_points: 0,
-  //         in_tournament_id: 1,
-  //         is_winner: false,
-  //         name: "aigars",
-  //         player_id: 1,
-  //         points: 18,
-  //         tournament_id: 4,
-  //         team_number: 1
-  //     },
-  //     {
-  //         big_points: 0,
-  //         in_tournament_id: 1,
-  //         is_winner: false,
-  //         name: "anna",
-  //         player_id: 3,
-  //         points: 18,
-  //         tournament_id: 4,
-  //         team_number: 1
-  //     }
-  //  ]
-  // }
-
   const finishGame = () => {
-    // setGameCount((state) => state + 1);
-
-    let newPlayerArray: IPlayerFromDB[] = [];
     const [playerOneATeam, playerTwoATeam] = teamA;
     const [playerOneBTeam, playerTwoBTeam] = teamB;
+
+    let newPlayerArray: IPlayerFromDB[] = [];
+
+    if (!tournamentId) {
+      return;
+    }
 
     // TODO: simplify this
     if (parseInt(teamScore.teamAScore) > parseInt(teamScore.teamBScore)) {
@@ -265,6 +214,7 @@ const Game: React.FC = () => {
             ...player,
             big_points: player.big_points + 1,
             is_winner: true,
+            team_number: 1,
             points: player.points + parseInt(teamScore.teamAScore)
           };
         } else if (
@@ -274,11 +224,15 @@ const Game: React.FC = () => {
           /* This team lost **/
           return {
             ...player,
+            team_number: 0,
             points: player.points + parseInt(teamScore.teamBScore)
           };
         } else {
           /* This player wasn't playing **/
-          return player;
+          return {
+            ...player,
+            team_number: 3
+          };
         }
       });
     }
@@ -296,6 +250,7 @@ const Game: React.FC = () => {
             ...player,
             big_points: player.big_points + 1,
             is_winner: true,
+            team_number: 1,
             points: player.points + parseInt(teamScore.teamBScore)
           };
         } else if (
@@ -305,19 +260,26 @@ const Game: React.FC = () => {
           /* This team lost **/
           return {
             ...player,
+            team_number: 0,
             points: player.points + parseInt(teamScore.teamAScore)
           };
         } else {
           /* This player wasn't playing **/
-          return player;
+          return {
+            ...player,
+            team_number: 3
+          };
         }
       });
     }
 
-    console.log("tournamentId: ", tournamentId);
-    console.log("setGameNumber: ", gameNumber);
-    console.log("newPlayerArray: ", newPlayerArray);
+    const gameData = {
+      tournament_id: tournamentId,
+      game_number: gameNumber,
+      teams: newPlayerArray
+    };
 
+    dispatch(saveGame(gameData));
     dispatch(setGameNumber(gameNumber + 1));
 
     // TODO: remove magic number 9
@@ -331,6 +293,8 @@ const Game: React.FC = () => {
       <div>
         <div className="game__current">
           {console.log("gameNumber: ", gameNumber)}
+          {console.log("teamA: ", teamA)}
+          {console.log("teamB: ", teamB)}
           <div className="game__current__teams">{displayTeam(teamA)}</div>
           <div className="game__current-score">
             <Input
