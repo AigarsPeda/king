@@ -4,6 +4,7 @@ import { ICreateTournament, IPlayerFromDB, ITournament } from "../../types";
 import { RootStateType } from "../reducers/reducers";
 import {
   SET_CURRENT_TOURNAMENT,
+  SET_NEW_PLAYERS,
   SET_TOURNAMENTS_GAME_NUMBER,
   SET_TOURNAMENTS_LOADING_SATE,
   SET_TOURNAMENT_PLAYERS,
@@ -23,32 +24,32 @@ type ICreateTournamentResponse = {
   playerArrayFromDB: IPlayerFromDB[];
 };
 
-export const createTournaments = (data: ICreateTournament): AppThunk => async (
-  dispatch
-) => {
-  dispatch({
-    type: SET_TOURNAMENTS_LOADING_SATE,
-    payload: true
-  });
+export const createTournaments =
+  (data: ICreateTournament): AppThunk =>
+  async (dispatch) => {
+    dispatch({
+      type: SET_TOURNAMENTS_LOADING_SATE,
+      payload: true
+    });
 
-  const response: ICreateTournamentResponse = await callAPI({
-    url: "/tournament/create",
-    method: "POST",
-    data: data
-  });
+    const response: ICreateTournamentResponse = await callAPI({
+      url: "/tournament/create",
+      method: "POST",
+      data: data
+    });
 
-  console.log(response);
+    console.log(response);
 
-  dispatch({
-    type: SET_CURRENT_TOURNAMENT,
-    payload: response.tournament
-  });
+    dispatch({
+      type: SET_CURRENT_TOURNAMENT,
+      payload: response.tournament
+    });
 
-  dispatch({
-    type: SET_TOURNAMENT_PLAYERS,
-    payload: response.playerArrayFromDB
-  });
-};
+    dispatch({
+      type: SET_TOURNAMENT_PLAYERS,
+      payload: response.playerArrayFromDB
+    });
+  };
 
 export const getAllTournaments = (): AppThunk => async (dispatch) => {
   dispatch({
@@ -67,11 +68,34 @@ export const getAllTournaments = (): AppThunk => async (dispatch) => {
   });
 };
 
-export const setGameNumber = (gameNumber: number): AppThunk => async (
-  dispatch
-) => {
-  dispatch({
-    type: SET_TOURNAMENTS_GAME_NUMBER,
-    payload: gameNumber
-  });
-};
+export const setGameNumber =
+  (gameNumber: number): AppThunk =>
+  async (dispatch) => {
+    dispatch({
+      type: SET_TOURNAMENTS_GAME_NUMBER,
+      payload: gameNumber
+    });
+  };
+
+export const saveGame =
+  (data: {
+    tournament_id: number;
+    game_number: number;
+    teams: IPlayerFromDB[];
+  }): AppThunk =>
+  async (dispatch) => {
+    console.log("data: ", data);
+
+    const newPlayerArray: IPlayerFromDB[] = await callAPI({
+      url: "/game",
+      method: "POST",
+      data: data
+    });
+
+    dispatch({
+      type: SET_TOURNAMENT_PLAYERS,
+      payload: newPlayerArray
+    });
+
+    console.log("newPlayerArray: ", newPlayerArray);
+  };
