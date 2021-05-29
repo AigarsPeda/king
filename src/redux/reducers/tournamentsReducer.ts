@@ -1,6 +1,7 @@
 import { IPlayerFromDB, ITournament } from "../../types";
 import {
   SET_CURRENT_TOURNAMENT,
+  SET_NEW_PLAYERS,
   SET_TOURNAMENTS_GAME_NUMBER,
   SET_TOURNAMENTS_LOADING_SATE,
   SET_TOURNAMENT_PLAYERS,
@@ -61,6 +62,12 @@ export const tournamentsReducer = (
       return {
         ...state,
         gameNumber: action.payload
+      };
+
+    case SET_NEW_PLAYERS:
+      return {
+        ...state,
+        playerArray: action.payload
       };
 
     default:
