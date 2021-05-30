@@ -30,9 +30,16 @@ interface ISetTournamentsGameNumber {
   payload: number;
 }
 
+export const SET_NEW_PLAYERS = "SET_NEW_PLAYERS";
+interface ISetNewPlayersArrayAction {
+  type: typeof SET_NEW_PLAYERS;
+  payload: IPlayerFromDB[];
+}
+
 export type TournamentsActionTypes =
   | ISetUserTournamentsAction
   | ISetCurrentTournamentAction
   | ISetTournamentsLoading
   | ISetTournamentPlayersAction
-  | ISetTournamentsGameNumber;
+  | ISetTournamentsGameNumber
+  | ISetNewPlayersArrayAction;
